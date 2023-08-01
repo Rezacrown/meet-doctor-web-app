@@ -15,8 +15,8 @@ class CreatePermissionRole extends Migration
     {
         Schema::create('permission_role', function (Blueprint $table) {
             $table->id();
-            $table->integer('role_id');
-            $table->integer('permission_id');
+            $table->foreignId('role_id')->index('fk_permission_role_to_role');
+            $table->foreignId('permission_id')->index('fk_permission_role_to_permission');
             $table->timestamps();
             $table->softDeletes();
         });
