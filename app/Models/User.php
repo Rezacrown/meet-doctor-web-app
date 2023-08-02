@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,9 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
+    // hati2 dalam penggunaan soft delete karena akan mengganggu jetsreamnya
+    // use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -58,4 +62,23 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    // relasi dengan appointment table
+    public function appoinment()
+    {
+        return $this->hasMany('App\Models\Operational\Appoinment', 'user_id');
+    }
+
+    // relasi dengan detail_user table
+    public function detail_user()
+    {
+        return $this->hasOne('App\Models\ManagementAccess\DetailUser', 'user_id');
+    }
+
+    // relasi dengan role_user table
+    public function role_user()
+    {
+        return $this->hasMany('App\Models\ManagementAccess\RoleUser', 'user_id');
+    }
 }
