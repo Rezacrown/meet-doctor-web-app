@@ -20,7 +20,7 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
 
     // hati2 dalam penggunaan soft delete karena akan mengganggu jetsreamnya
-    // use SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

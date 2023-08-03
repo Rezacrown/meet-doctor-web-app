@@ -37,6 +37,6 @@ class Permission extends Model
     // relasi dengan table role
     public function permission_role()
     {
-        return $this->belongsTo('App\Models\ManagementAccess\PermissionRole', 'permission_id');
+        return $this->hasMany('App\Models\ManagementAccess\PermissionRole', 'permission_id');
     }
 }
