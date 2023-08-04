@@ -4,6 +4,11 @@ namespace App\Http\Requests\Docter;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Models\Operational\Docter;
+use Symfony\Component\HttpFoundation;
+// use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Validation\Rule;
+
 class StoreDocterRequest extends FormRequest
 {
     /**
@@ -13,7 +18,7 @@ class StoreDocterRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +29,11 @@ class StoreDocterRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'specialist_id' => ['required', 'integer',],
+            'name' => ['required', 'string', 'max' => 255],
+            'fee' => ['required', 'string', 'max' => 255],
+            'photo' => ['nullable', 'string', 'max:10000'],
+            // cara lain selain pakai tanda => panah
         ];
     }
 }
