@@ -29,7 +29,8 @@ class StoreConsultationtRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:consultation']
+            'name' => ['required', 'string', 'max:255', Rule::unique('consultation')]
+            // cara lain selain manual pakai string bisa pakai class Rule untuk membuat aturan request nya
         ];
     }
 }

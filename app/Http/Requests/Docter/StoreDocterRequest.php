@@ -33,7 +33,8 @@ class StoreDocterRequest extends FormRequest
             'name' => ['required', 'string', 'max' => 255],
             'fee' => ['required', 'string', 'max' => 255],
             'photo' => ['nullable', 'string', 'max:10000'],
-            // cara lain selain pakai tanda => panah
+            // cara lain selain pakai tanda => (panah) adlaah langsung seperti max:1000
         ];
     }
+
 }

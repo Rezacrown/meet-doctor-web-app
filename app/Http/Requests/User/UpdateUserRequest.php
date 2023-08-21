@@ -36,7 +36,12 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max' => 255],
             'email' => ['required', 'string', 'email', Rule::unique('users')->ignore($this->User)],
+
             // Rule:: unique only work for other record id
+            
+            // mengapa ada $this->User ? itu karena mengacu pada Model yang dibuat dan karena User itu secara default dari jetsream nya maka kita ikut aja aturan bawaann nya si jetsream
+
+            // ->ignore akan mengabaikan pencarian untuk email yang diberikan oleh user, artinya dia akan mengecek semua email yang ada di database, jika ditemukan 1 saja email maka dia akan memberikan respon bahwa email duplikat
             'password' => ['min:8', 'string', 'max' => 255],
         ];
     }
