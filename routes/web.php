@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Frontsite\AppointmentController;
 use Illuminate\Support\Facades\Route;
 
 
 // import controller
 use App\Http\Controllers\Frontsite\LandingController;
+use App\Http\Controllers\Frontsite\PaymentController;
 use App\Http\Controllers\TestController2;
 
 
@@ -20,15 +22,51 @@ use App\Http\Controllers\TestController2;
 */
 
 // Route::resource fungsi sama seperti GET, POST DLL, hanya saja itu akan otomatis mencocokan http methodnya sesuai dengan jika menggunakan php artisan make:controller --resource
+// di pisah dari group karena ini tidak butuh authentikasi untuk akses landing pagenya
 Route::resource('/', LandingController::class);
+
+
+
 // contoh groping route
+// ini adalah Front site
+Route::group(['middleware' => ['auth::sactum' => 'verified']], function (){
+    // Appointment Page
+    Route::resource('appointment', AppointmentController::class);
+
+    // Payment Page
+    Route::resource('payment', PaymentController::class);
+
+
+});
+
+// ini Back site
 Route::group(['prefix' => 'backsite', 'as' => 'back', 'middleware' => ['auth::sactum' => 'verified']], function (){
-    Route::get('/halo', function(){
-        return view('welcome');
+    Route::get('dashboard', function (){
+        return view('dashboard');
     });
+
+
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ini latihan
 // akan relatif terhadap folder controllers pada http di folder app
 // contoh untuk memanggil controller, harus dalam bentuk array dengan isi: parameter pertama adalah namespacenya dan parameter kedua adalah nama method nya
 // Route::get('/halo', ['App\Http\Controllers\Frontsite\LandingController', 'index'])    <----;
@@ -40,7 +78,7 @@ Route::get('/testing', ['App\Http\Controllers\TestController2', 'index']);
 Route::get('/testing2', [TestController2::class, 'index'] );
 //
 Route::get('/landing', ['App\Http\Controllers\Frontsite\LandingController', 'index']);
-//
+// end latihan
 
 
 
