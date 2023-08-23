@@ -19,6 +19,9 @@ use File;
 use App\Models\User;
 use App\Models\Operational\Docter;
 use App\Models\MasterData\Specialist;
+use APp\Models\Operational\Appointment;
+use App\Models\MasterData\Consultation;
+use App\Models\MasterData\ConfigPayment;
 
 // three party packcage
 

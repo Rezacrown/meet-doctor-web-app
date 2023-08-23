@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+
+// import controller
 use App\Http\Controllers\Frontsite\LandingController;
+use App\Http\Controllers\TestController2;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +19,13 @@ use App\Http\Controllers\Frontsite\LandingController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::resource fungsi sama seperti GET, POST DLL, hanya saja itu akan otomatis mencocokan http methodnya sesuai dengan jika menggunakan php artisan make:controller --resource
+Route::resource('/', LandingController::class);
+// contoh groping route
+Route::group(['prefix' => 'backsite', 'as' => 'back', 'middleware' => ['auth::sactum' => 'verified']], function (){
+    Route::get('/halo', function(){
+        return view('welcome');
+    });
 });
 
 
@@ -25,10 +35,16 @@ Route::get('/', function () {
 Route::get('/testing', ['App\Http\Controllers\TestController2', 'index']);
 // contoh ↖️
 
-
-
-
+// contoh 2
+// bisa import dulu controller nya lalu buat seperti dibawah dengan array parameter 1 adalah controllernya dan parameter ke 2 adalah nama method yang ada pada controller tersebut yang akan digunakan
+Route::get('/testing2', [TestController2::class, 'index'] );
+//
 Route::get('/landing', ['App\Http\Controllers\Frontsite\LandingController', 'index']);
+//
+
+
+
+
 
 //
 Route::middleware([

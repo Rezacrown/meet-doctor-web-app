@@ -26,10 +26,10 @@ use App\Models\MasterData\Specialist;
 class LandingController extends Controller
 {
     // akan jalan lebih dulu saat di object di instance "makanya belajar OOP PHP!"
-    public function __construct() {
-        // register midlleware
-        $this->middleware('auth');
-    }
+    // public function __construct() {
+    //     // register midlleware
+    //     $this->middleware('auth');
+    // }
 
 
     /**

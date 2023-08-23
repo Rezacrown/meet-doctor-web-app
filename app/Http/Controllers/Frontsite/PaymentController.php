@@ -5,8 +5,32 @@ namespace App\Http\Controllers\Frontsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// use library
+use Illuminate\Support\Facades\Storage;
+use symfony\Component\HttpFoundation\Response;
+// use Response;
+
+// use everythings
+use Gate;
+use Auth;
+use File;
+
+// import model
+use App\Models\User;
+use App\Models\Operational\Docter;
+use App\Models\MasterData\Specialist;
+use APp\Models\Operational\Appointment;
+use App\Models\MasterData\Consultation;
+use App\Models\MasterData\ConfigPayment;
+
+// three party packcage
+
 class PaymentController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
