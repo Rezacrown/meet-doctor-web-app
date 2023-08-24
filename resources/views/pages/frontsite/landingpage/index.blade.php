@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>hello bro</h1>
-<div class="">
-    <h5>
-      landing
-    </h5>
-</div>
-</body>
-</html>
+{{-- extend fungsi nya dalah untuk melakukan render terhadap layout yang dipilih, mirip seperti @layout() pada adonis js --}}
+@extends('layouts.default')
+
+
+{{-- @section() adalah pasangan untuk @yield, yang fungsi untuk render komponen atau data isi kontent --}}
+{{-- 2 parameter untuk rendering/pasing  data  --}}
+@section('title', 'Landing')
+
+{{-- @section dengan @endsection untuk masukan konten / kodingan / komponen --}}
+@section('content')
+    
+@endsection
+
