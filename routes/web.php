@@ -5,9 +5,13 @@ use Illuminate\Support\Facades\Route;
 
 
 // import controller
+// frontsite
+use App\Http\Controllers\TestController2;
 use App\Http\Controllers\Frontsite\LandingController;
 use App\Http\Controllers\Frontsite\PaymentController;
-use App\Http\Controllers\TestController2;
+
+// backsite
+use App\Http\Controllers\Backsite\DashboardController;
 
 
 /*
@@ -21,10 +25,10 @@ use App\Http\Controllers\TestController2;
 |
 */
 
+
 // Route::resource fungsi sama seperti GET, POST DLL, hanya saja itu akan otomatis mencocokan http methodnya sesuai dengan jika menggunakan php artisan make:controller --resource
 // dipisah dari group karena ini tidak butuh authentikasi untuk akses landing pagenya
 Route::resource('/', LandingController::class);
-
 // contoh jika pakai middleware
 // Route::resource('/', LandingController::class)->middleware(['auth::sactum' => 'verified']);
 
@@ -44,10 +48,12 @@ Route::group(['middleware' => ['auth::sactum' => 'verified']], function (){
 
 // ini Back site
 Route::group(['prefix' => 'backsite', 'as' => 'back', 'middleware' => ['auth::sactum' => 'verified']], function (){
-    Route::get('dashboard', function (){
-        return view('dashboard');
-    });
+    // Route::get('dashboard', function (){
+    //     return view('dashboard');
+    // });
 
+    // dashboard
+    Route::resource('dashboard', DashboardController::class);
 
 });
 
@@ -88,12 +94,12 @@ Route::get('/landing', ['App\Http\Controllers\Frontsite\LandingController', 'ind
 
 
 //
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });

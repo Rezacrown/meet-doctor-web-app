@@ -24,7 +24,7 @@ href="{{ url('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', []
         <div class="flex flex-wrap items-center space-x-5">
           <div class="flex-shrink-0">
             <img
-              src="assets/frontsite/images/doctor-1.png"
+              src="{{ asset('assets/frontsite/images/doctor-1.png') }}"
               class="object-cover object-top w-20 h-20 bg-center rounded-full"
               alt="Doctor 1"
             />
@@ -152,7 +152,7 @@ href="{{ url('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', []
                 for="master-card"
               >
                 <img
-                  src="assets/frontsite/images/master-card.png"
+                  src="{{ asset('assets/frontsite/images/master-card.png') }}"
                   class="max-h-[50px] inline-block"
                   alt="Master card"
                 />
@@ -173,7 +173,7 @@ href="{{ url('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', []
                 for="visa"
               >
                 <img
-                  src="/assets/frontsite/images/visa.png"
+                  src="{{ asset('/assets/frontsite/images/visa.png') }}"
                   class="max-h-[50px] inline-block"
                   alt="Master card"
                 />
@@ -194,7 +194,7 @@ href="{{ url('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', []
                 for="cirrus"
               >
                 <img
-                  src="/assets/frontsite/images/cirrus.png"
+                  src="{{ asset('/assets/frontsite/images/cirrus.png') }}"
                   class="max-h-[50px] inline-block"
                   alt="Master card"
                 />
@@ -215,7 +215,7 @@ href="{{ url('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', []
                 for="mewallet"
               >
                 <img
-                  src="/assets/frontsite/images/mewallet.png"
+                  src="{{ asset('/assets/frontsite/images/mewallet.png') }}"
                   class="max-h-[50px] inline-block"
                   alt="Master card"
                 />
@@ -248,7 +248,7 @@ href="{{ url('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', []
           </div>
         </form>
       </div>
-      
+
     </div>
   </div>
 @endsection
