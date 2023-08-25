@@ -22,20 +22,23 @@ use App\Http\Controllers\TestController2;
 */
 
 // Route::resource fungsi sama seperti GET, POST DLL, hanya saja itu akan otomatis mencocokan http methodnya sesuai dengan jika menggunakan php artisan make:controller --resource
-// di pisah dari group karena ini tidak butuh authentikasi untuk akses landing pagenya
+// dipisah dari group karena ini tidak butuh authentikasi untuk akses landing pagenya
 Route::resource('/', LandingController::class);
 
+// contoh jika pakai middleware
+// Route::resource('/', LandingController::class)->middleware(['auth::sactum' => 'verified']);
 
 
-// contoh groping route
+// contoh groping route ->
+
 // ini adalah Front site
 Route::group(['middleware' => ['auth::sactum' => 'verified']], function (){
+
     // Appointment Page
     Route::resource('appointment', AppointmentController::class);
 
     // Payment Page
     Route::resource('payment', PaymentController::class);
-
 
 });
 
