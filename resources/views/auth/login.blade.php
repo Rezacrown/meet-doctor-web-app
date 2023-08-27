@@ -33,8 +33,9 @@
 
                         <!-- Form input -->
                         <form method="POST" action="{{ route('login') }}" class="grid gap-6">
+                            {{-- token, wajib untuk melakukan request --}}
                             @csrf
-                            
+
                             <label class="block">
                                 <input type="email" id="email" name="email" value="{{ Request::old('email') }}" autofocus required
                                     class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
@@ -62,7 +63,7 @@
                                     class="text-center text-white text-lg font-medium bg-[#0D63F3] px-10 py-4 rounded-full">
                                     Sign In
                                 </button>
-                                <a href="sign-up.html"
+                                <a href="{{ route('register', []) }}"
                                     class="text-center text-lg text-[#1E2B4F] font-medium bg-[#F2F6FE] px-10 py-4 rounded-full">
                                     New Account
                                 </a>

@@ -33,6 +33,7 @@ Route::resource('/', LandingController::class);
 // Route::resource('/', LandingController::class)->middleware(['auth::sactum' => 'verified']);
 
 
+
 // contoh groping route ->
 
 // ini adalah Front site
@@ -48,12 +49,10 @@ Route::group(['middleware' => ['auth::sactum' => 'verified']], function (){
 
 // ini Back site
 Route::group(['prefix' => 'backsite', 'as' => 'back', 'middleware' => ['auth::sactum' => 'verified']], function (){
-    // Route::get('dashboard', function (){
-    //     return view('dashboard');
-    // });
 
     // dashboard
     Route::resource('dashboard', DashboardController::class);
+
 
 });
 
@@ -79,14 +78,14 @@ Route::group(['prefix' => 'backsite', 'as' => 'back', 'middleware' => ['auth::sa
 // akan relatif terhadap folder controllers pada http di folder app
 // contoh untuk memanggil controller, harus dalam bentuk array dengan isi: parameter pertama adalah namespacenya dan parameter kedua adalah nama method nya
 // Route::get('/halo', ['App\Http\Controllers\Frontsite\LandingController', 'index'])    <----;
-Route::get('/testing', ['App\Http\Controllers\TestController2', 'index']);
+// Route::get('/testing', ['App\Http\Controllers\TestController2', 'index']);
 // contoh ↖️
 
 // contoh 2
 // bisa import dulu controller nya lalu buat seperti dibawah dengan array parameter 1 adalah controllernya dan parameter ke 2 adalah nama method yang ada pada controller tersebut yang akan digunakan
-Route::get('/testing2', [TestController2::class, 'index'] );
+// Route::get('/testing2', [TestController2::class, 'index'] );
 //
-Route::get('/landing', ['App\Http\Controllers\Frontsite\LandingController', 'index']);
+// Route::get('/landing', ['App\Http\Controllers\Frontsite\LandingController', 'index']);
 // end latihan
 
 
