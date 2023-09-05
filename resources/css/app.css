@@ -1,3 +1,9 @@
-@tailwind base;
+/* yang lama gk ketedect */
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+
+/* yang baru mudahan bisa */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

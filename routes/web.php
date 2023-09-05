@@ -12,7 +12,9 @@ use App\Http\Controllers\Frontsite\PaymentController;
 
 // backsite
 use App\Http\Controllers\Backsite\DashboardController;
-
+use App\Http\Controllers\backsite\DocterController;
+use App\Http\Controllers\backsite\SpecialistController;
+use App\Http\Controllers\backsite\TypeUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,17 +46,53 @@ Route::group(['middleware' => ['auth::sactum' => 'verified']], function (){
 
     // Payment Page
     Route::resource('payment', PaymentController::class);
+    // dashboard
+    // Route::resource('payment', function () {
+    //     return view('pages.frontsite.dashboard.index');
+    // });
+
+
+
+
+    // sukses route
+    // Route::get('sukses', function () {
+
+    //     return response()->view('pages.frontsite.success.signup-success');
+    // });
+
+    // Route::get('sukses2', function () {
+
+    //     return response()->view('pages.frontsite.success.payment-success');
+    // });
 
 });
 
 // ini Back site
-Route::group(['prefix' => 'backsite', 'as' => 'back', 'middleware' => ['auth::sactum' => 'verified']], function (){
+Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth::sactum' => 'verified']], function (){
 
-    // dashboard
-    Route::resource('dashboard', DashboardController::class);
+    // dashboard Route
+        // wajib kasih names untuk nama routingnya, dan cara aksesnya adalah dengan name prefix + name route + nama method contoh
+        // backsite.dashboard.index
+   	   Route::resource('dashboard', DashboardController::class);
+
+    //    type user route
+   	   Route::resource('type_user', TypeUserController::class);
+
+    //    specilaist route
+   	   Route::resource('specialist', SpecialistController::class);
+
+    //    docter route
+   	   Route::resource('docter', DocterController::class);
+
+
+
+
 
 
 });
+
+
+
 
 
 

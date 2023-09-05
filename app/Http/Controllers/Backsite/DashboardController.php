@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class DashboardController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +17,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.backsite.dashboard.index');
+
+        // alert('title', 'ini adalah sweet alert');
+        alert('Title','Lorem Lorem Lorem');
+
+
+        return response()->view('pages.backsite.dashboard.index');
     }
 
     /**
@@ -25,9 +33,10 @@ class DashboardController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
+
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -38,7 +47,7 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         return abort(404);
     }
 
     /**
@@ -49,7 +58,7 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+         return abort(404);
     }
 
     /**
@@ -60,7 +69,7 @@ class DashboardController extends Controller
      */
     public function edit($id)
     {
-        //
+         return abort(404);
     }
 
     /**
@@ -72,7 +81,7 @@ class DashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         return abort(404);
     }
 
     /**
@@ -83,6 +92,6 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        //
+         return abort(404);
     }
 }

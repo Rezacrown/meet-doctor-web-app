@@ -1,49 +1,46 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="loading" lang="en" data-textdirection="ltr">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('includes.backsite.meta')
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title> @yield('title') | Meet Doctor Backoffice </title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link rel="apple-touch-icon" href="{{ asset('assets/backsite/app-assets/images/ico/apple-icon-120.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/backsite/app-assets/images/ico/favicon.ico') }}">
+    <link
+        href="{{ url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700') }}"
+        rel="stylesheet">
 
-    <!-- Styles -->
-    @livewireStyles
+    @stack('before-style')
+    @include('includes.backsite.style')
+    @stack('after-style')
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Scripts -->
 </head>
 
-<body class="font-sans antialiased">
-    <x-jet-banner />
+<body class="vertical-layout vertical-menu 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu"
+    data-col="2-columns">
 
-    <div class="min-h-screen bg-gray-100">
-        @livewire('navigation-menu')
+    {{-- @include('sweetalert::alert') --}}
+    @include('sweetalert::alert')
 
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
+    @include('components.backsite.header')
+    @include('components.backsite.sidebar')
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+    <div class="app-content content"></div>
+    <div class="content-overlay">
+        <div class="content-wrapper">
+            @yield('content')
+        </div>
+    </div>
     </div>
 
-    @stack('modals')
+    @include('components.backsite.footer')
 
-    @livewireScripts
+    @stack('before-script')
+    @include('includes.backsite.script')
+    @stack('after-script')
+
 </body>
 
 </html>

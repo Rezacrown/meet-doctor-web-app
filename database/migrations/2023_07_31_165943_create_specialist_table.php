@@ -18,6 +18,7 @@ class CreateSpecialistTable extends Migration
             $table->string('name')->unique();
             $table->string('pricing');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

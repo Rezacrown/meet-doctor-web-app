@@ -32,9 +32,9 @@
                                 <input type="text" name="name" id="name"
                                     class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
                                     placeholder="Complete Name" value="{{ $request->old('name') }}" required autofocus />
-                                    @if ($errors->has('name'))
-                                        <p class="mb-3 text-red-500 text-text-sm"> {{$errors->first('name')}} </p>
-                                    @endif
+                                @if ($errors->has('name'))
+                                    <p class="mb-3 text-red-500 text-text-sm"> {{ $errors->first('name') }} </p>
+                                @endif
                             </label>
 
                             {{-- <label class="block">
@@ -47,27 +47,33 @@
                                 <input type="email" name="email" id="email"
                                     class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
                                     placeholder="Email Address" value="{{ $request->old('email') }}" required autofocus />
-                                    @if ($errors->has('email'))
+                                {{-- @if ($errors->has('email'))
                                         <p class="mb-3 text-sm text-red-500"> {{$errors->first('email')}} </p>
-                                    @endif
+                                    @endif --}}
+                                {{-- cara lain --}}
+                                @error('email')
+                                    {{-- $message untuk nampilin error --}}
+                                    <span class="px-4 py-3 text-red-700 bg-red-100 border border-t-0 border-red-400 rounded-lg">{{ $message }}</span>
+                                @enderror
                             </label>
+
 
                             <label class="block">
                                 <input type="password" name="password" id="password"
                                     class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
                                     placeholder="Password" value="{{ $request->old('password') }}" required autofocus />
-                                    @if ($errors->has('password'))
-                                        <p class="mb-3 text-sm text-red-500"> {{$errors->first('password')}} </p>
-                                    @endif
+                                @if ($errors->has('password'))
+                                    <p class="mb-3 text-sm text-red-500"> {{ $errors->first('password') }} </p>
+                                @endif
                             </label>
 
                             <label class="block">
                                 <input type="password" name="password_confirmation" id="password_confirmation"
                                     class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
                                     placeholder="Confirm Password" required autofocus />
-                                    @if ($errors->has('password_confirmation'))
-                                        <p class="mb-3 text-sm text-red-500"> {{$errors->first('password_confirmation')}} </p>
-                                    @endif
+                                @if ($errors->has('password_confirmation'))
+                                    <p class="mb-3 text-sm text-red-500"> {{ $errors->first('password_confirmation') }} </p>
+                                @endif
                             </label>
 
                             <div class="grid gap-6 mt-10">
@@ -121,3 +127,5 @@
     </div>
 
 @endsection
+
+
