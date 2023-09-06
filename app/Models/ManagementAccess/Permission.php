@@ -39,4 +39,9 @@ class Permission extends Model
     {
         return $this->hasMany('App\Models\ManagementAccess\PermissionRole', 'permission_id');
     }
+
+    // relation many to many
+    function role() {
+        return $this->belongsToMany('App\Models\ManagementAccess\Role');
+    }
 }

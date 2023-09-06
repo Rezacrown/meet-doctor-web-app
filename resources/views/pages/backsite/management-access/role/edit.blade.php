@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Edit - Config Payment')
+@section('title', 'Edit - Role')
 
 @section('content')
 <!-- BEGIN: Content-->
@@ -27,12 +27,12 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="mb-2 content-header-left col-md-6 col-12 breadcrumb-new">
-                    <h3 class="mb-0 content-header-title d-inline-block">Edit Config Payment</h3>
+                    <h3 class="mb-0 content-header-title d-inline-block">Edit Role</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Dashboard</li>
-                                <li class="breadcrumb-item">Config Payment</li>
+                                <li class="breadcrumb-item">Role</li>
                                 <li class="breadcrumb-item active">Edit</li>
                             </ol>
                         </div>
@@ -61,33 +61,46 @@
                                         <div class="card-text">
                                             <p>Please complete the input <code>required</code>, before you click the submit button.</p>
                                         </div>
-                                        <form class="form form-horizontal" action="{{ route("backsite.config_payment.update", [$config_payment->id]) }}" method="POST" enctype="multipart/form-data">
+                                        <form class="form form-horizontal" action="{{ route("backsite.role.update", [$role->id]) }}" method="POST" enctype="multipart/form-data">
 
                                                 @method('PUT')
                                                 @csrf
 
                                                 <div class="form-body">
 
-                                                    <h4 class="form-section"><i class="fa fa-edit"></i> Form Config Payment</h4>
-
+                                                    <h4 class="form-section"><i class="fa fa-edit"></i> Form Role</h4>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="fee">Fee <code style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="title">Role <code style="color:red;">required</code></label>
                                                         <div class="mx-auto col-md-9">
-                                                            <input type="text" id="fee" name="fee" class="form-control" placeholder="example fee 10000" value="{{ old('fee', isset($config_payment) ? $config_payment->fee : '') }}" autocomplete="off" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': 'IDR ', 'placeholder': '0'" required>
+                                                            <input type="text" id="title" name="title" class="form-control" placeholder="example admin or users" value="{{ old('title', isset($role) ? $role->title : '') }}" autocomplete="off" required>
 
-                                                            @if($errors->has('fee'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('fee') }}</p>
+                                                            @if($errors->has('title'))
+                                                                <p style="font-style: bold; color: red;">{{ $errors->first('title') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="vat">Vat <code style="color:red;">required</code></label>
+                                                    <div class="form-group row {{ $errors->has('permissions') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Permission <code style="color:green;">optional</code></label>
                                                         <div class="mx-auto col-md-9">
-                                                            <input type="text" id="vat" name="vat" class="form-control" placeholder="example vat 10000" value="{{ old('vat', isset($config_payment) ? $config_payment->vat : '') }}" autocomplete="off" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': '', 'placeholder': '0'" required>
 
-                                                            @if($errors->has('vat'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('vat') }}</p>
+                                                            <label for="permission">
+                                                                <span class="select-all btn btn-warning btn-sm">{{ 'Select All' }}</span>
+                                                                <span class="btn btn-warning btn-sm deselect-all">{{ 'Deselect All' }}</span>
+                                                            </label>
+
+                                                            <select name="permission[]"
+                                                                    id="permission"
+                                                                    class="form-control select2-full-bg"
+                                                                    data-bgcolor="teal" data-bgcolor-variation="lighten-3" data-text-color="black"
+                                                                    multiple="multiple">
+                                                                @foreach($permission as $id => $permission_item)
+                                                                    <option value="{{ $permission_item->id }}" {{ (in_array($permission_item->id, old('permission', [])) || isset($role) && $role->permission->contains($permission_item->id)) ? 'selected' : '' }}>{{ $permission_item->title }}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if($errors->has('permission'))
+                                                                <p style="font-style: bold; color: red;">{{ $errors->first('permission') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -95,7 +108,7 @@
                                                 </div>
 
                                                 <div class="text-right form-actions">
-                                                    <a href="{{ route('backsite.config_payment.index') }}" style="width:120px;" class="mr-1 text-white btn bg-blue-grey" onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
+                                                    <a href="{{ route('backsite.role.index') }}" style="width:120px;" class="mr-1 text-white btn bg-blue-grey" onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
                                                         <i class="ft-x"></i> Cancel
                                                     </a>
                                                     <button type="submit" style="width:120px;" class="btn btn-cyan" onclick="return confirm('Are you sure want to save this data ?')">
@@ -117,17 +130,21 @@
 
 @endsection
 
-
 @push('after-script')
 
-    {{-- inputmask --}}
-    <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/jquery.inputmask.js') }}"></script>
-    <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/inputmask.js') }}"></script>
-    <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/bindings/inputmask.binding.js') }}"></script>
-
     <script>
-        $(function() {
-            $(":input").inputmask();
+        jQuery(document).ready(function($){
+            $('.select-all').click(function () {
+                let $select2 = $(this).parent().siblings('.select2-full-bg')
+                $select2.find('option').prop('selected', 'selected')
+                $select2.trigger('change')
+            })
+
+            $('.deselect-all').click(function () {
+                let $select2 = $(this).parent().siblings('.select2-full-bg')
+                $select2.find('option').prop('selected', '')
+                $select2.trigger('change')
+            })
         });
     </script>
 

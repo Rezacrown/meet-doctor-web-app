@@ -41,4 +41,6 @@ class TypeUser extends Model
         // sedangkan parameter kedua adalah field yang ingin di lakukan relasi
         return $this->hasMany('App\Models\ManagementAccess\DetailUser', 'type_user_id');
     }
+
+
 }

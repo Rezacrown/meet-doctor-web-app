@@ -1,20 +1,28 @@
 <?php
 
-use App\Http\Controllers\Frontsite\AppointmentController;
+use App\Http\Controllers\Backsite\ConfigPaymentController;
+use App\Http\Controllers\Backsite\ConsultationController;
+use App\Http\Controllers\Backsite\ReportAppointmentController;
+use App\Http\Controllers\Backsite\ReportTransactionController;
 use Illuminate\Support\Facades\Route;
 
 
 // import controller
 // frontsite
 use App\Http\Controllers\TestController2;
+use App\Http\Controllers\Frontsite\AppointmentController;
 use App\Http\Controllers\Frontsite\LandingController;
 use App\Http\Controllers\Frontsite\PaymentController;
 
 // backsite
 use App\Http\Controllers\Backsite\DashboardController;
 use App\Http\Controllers\backsite\DocterController;
+use App\Http\Controllers\Backsite\HospitalPatientController;
+use App\Http\Controllers\Backsite\PermissionController;
+use App\Http\Controllers\Backsite\RoleController;
 use App\Http\Controllers\backsite\SpecialistController;
 use App\Http\Controllers\backsite\TypeUserController;
+use App\Http\Controllers\Backsite\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +83,7 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
         // backsite.dashboard.index
    	   Route::resource('dashboard', DashboardController::class);
 
-    //    type user route
+    //    type_user route
    	   Route::resource('type_user', TypeUserController::class);
 
     //    specilaist route
@@ -84,10 +92,32 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
     //    docter route
    	   Route::resource('docter', DocterController::class);
 
+    //    Role User route
+   	   Route::resource('role', RoleController::class);
 
+    //    Permission route
+   	   Route::resource('permission', PermissionController::class);
 
+    //  Permission route
+   	   Route::resource('permission', PermissionController::class);
 
+       //    User route
+   	   Route::resource('user', UserController::class);
 
+       //   Config_payment route
+   	   Route::resource('config_payment', ConfigPaymentController::class);
+
+       //  consultation route
+   	   Route::resource('consultation', ConsultationController::class);
+
+       //  Hospital patient route
+   	   Route::resource('hospital_patient', HospitalPatientController::class);
+
+       // report appointment route
+   	   Route::resource('appointment', ReportAppointmentController::class);
+
+        // report transaction route
+    Route::resource('transaction', ReportTransactionController::class);
 
 });
 

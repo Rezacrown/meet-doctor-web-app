@@ -5,6 +5,7 @@ namespace App\Models\ManagementAccess;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\User;
 
 class Role extends Model
 {
@@ -43,4 +44,21 @@ class Role extends Model
     public function permission_role() {
         return $this->hasMany('App\Models\ManagementAccess\PermissionRole', 'role_id');
     }
+
+
+    // case relation many to many
+
+    // relasi dengan table User
+    public function user(){
+        return $this->belongsToMany(User::class);
+    }
+
+    // dalam relasi manyToMany dan BelongsTomany, parameter kedua tidak ditulis dikarenakan sebagai contoh Setiap User akan punya banyak Role dan role juga akan punya banyak user yg menjadikannya tidak bisa dikasih spesifik collumn sebagai foreign key nya
+
+    // relasi dengan table permission
+    public function permission() {
+        return $this->belongsToMany('App\Models\ManagementAccess\Permission');
+    }
+
+
 }
