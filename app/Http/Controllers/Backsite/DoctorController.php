@@ -23,7 +23,7 @@ use App\Models\MasterData\Specialist;
 // import librart laravel
 use Auth;
 // pakai yg dari Illuminate\Support\Facades
-use Illuminate\Support\Facades\Gate as FacadesGate;
+use Illuminate\Support\Facades\Gate;
 // use Gate;
 
 class DoctorController extends Controller
@@ -40,7 +40,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        abort_if(FacadesGate::denies('doctor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('doctor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // for table grid
         $doctor = Doctor::orderBy('created_at', 'desc')->get();
@@ -70,7 +70,7 @@ class DoctorController extends Controller
     public function store(StoreDoctorRequest $request)
     {
         // automatis create doctor by all request
-        // $doctor = Docter::create($request->all());
+        // $doctor = Doctor::create($request->all());
 
         // get all request from frontsite
         $data = $request->all();
@@ -114,7 +114,7 @@ class DoctorController extends Controller
     {
 
 
-        abort_if(FacadesGate::denies('doctor_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('doctor_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return response()->view('pages.backsite.operational.doctor.show', compact('doctor'));
     }
@@ -127,6 +127,7 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
+        abort_if(Gate::denies('doctor_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // for select2 = ascending a to z
         $specialist = Specialist::orderBy('name', 'asc')->get();
@@ -191,7 +192,7 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
-        // $doctor->forceDelete();
+        abort_if(Gate::denies('doctor_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // first checking old file to delete from storage
         $get_item = $doctor['photo'];

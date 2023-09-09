@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -20,6 +22,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('dashboard_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // alert('title', 'ini adalah sweet alert');
         alert('Title','Lorem Lorem Lorem');

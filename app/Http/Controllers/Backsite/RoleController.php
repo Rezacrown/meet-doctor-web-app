@@ -15,6 +15,11 @@ use App\Http\Requests\Role\{StoreRoleRequest, UpdateRoleRequest};
 use App\Models\ManagementAccess\Role;
 use App\Models\ManagementAccess\RoleUser;
 
+// use needed
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 class RoleController extends Controller
 {
 
@@ -29,6 +34,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $role = Role::orderBy('created_at', 'desc')->get();
 
@@ -67,6 +73,8 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
+        abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // $data = $role->query()->where('id', $role->id());
 
         // load untuk ambil relasi di data tunggal
@@ -89,6 +97,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        abort_if(Gate::denies('role_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // get all permission
         $permission = Permission::all();
         // get data relation from $role , this will be use to validate input ( maybe )
@@ -125,6 +135,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
          $role->forceDelete();
 
         alert()->success('Success Message','Successfully deleted role');

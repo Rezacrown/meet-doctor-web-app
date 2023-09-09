@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ConfigPayment\UpdateConfigPaymentRequest;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Response;
+
 use App\Models\MasterData\ConfigPayment;
 class ConfigPaymentController extends Controller
 {
@@ -21,6 +24,8 @@ class ConfigPaymentController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('config_payment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $config_payment = ConfigPayment::all();
 
         return response()->view('pages.backsite.master-data.config-payment.index', compact('config_payment'));
@@ -65,6 +70,8 @@ class ConfigPaymentController extends Controller
      */
     public function edit(ConfigPayment $config_payment)
     {
+        abort_if(Gate::denies('config_payment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return response()->view('pages.backsite.master-data.config-payment.edit', compact('config_payment'));
     }
 

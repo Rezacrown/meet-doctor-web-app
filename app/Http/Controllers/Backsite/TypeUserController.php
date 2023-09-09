@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\MasterData\TypeUser;
 use Illuminate\Http\Request;
 
-use Auth;
-// Gate fungsinya untuk Authorize Role kek gitu
-use Gate;
-// use Illuminate\Support\Facades\DB;
+// use needed
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TypeUserController extends Controller
 {
@@ -25,6 +25,8 @@ class TypeUserController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('type_user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
         // jika memakai all maka akan get dulu di database lalu disortir di bagian phpnya
         // $typeUser = TypeUser::all()->sortBy('id', SORT_DESC, true);
 

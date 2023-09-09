@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class HospitalPatientController extends Controller
 {
@@ -19,6 +20,7 @@ class HospitalPatientController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('hospital_patient_access'), \Illuminate\Http\Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $hospital_patient = User::whereHas('detail_user', function ($query) {
             // kenapa dicari type_user_id nya harus 3 karena itu mengacu pada ERD, dimana 3 itu adalah id untuk type pasien
