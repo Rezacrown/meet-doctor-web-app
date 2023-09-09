@@ -48,9 +48,9 @@ class RoleUser extends Model
     }
 
 
-    // may to many
+    // many to many
          public function permission()
     {
-        return $this->belongsToMany('App\Models\ManagementAccess\Permission',);
+        return $this->belongsToMany('App\Models\ManagementAccess\Permission', 'permission_role');
     }
 }

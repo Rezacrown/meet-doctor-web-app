@@ -17,7 +17,7 @@ use File;
 
 // import model
 use App\Models\User;
-use App\Models\Operational\Docter;
+use App\Models\Operational\Doctor;
 use App\Models\MasterData\Specialist;
 use APp\Models\Operational\Appointment;
 use App\Models\MasterData\Consultation;
@@ -38,7 +38,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('pages.frontsite.payment.index');
+        return response()->view('pages.frontsite.payment.index');
     }
 
     /**
@@ -48,7 +48,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        return abort(403);
     }
 
     /**
@@ -59,7 +59,7 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(403);
     }
 
     /**
@@ -70,7 +70,7 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(403);
     }
 
     /**
@@ -81,7 +81,7 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        //
+        return abort(403);
     }
 
     /**
@@ -93,7 +93,7 @@ class PaymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return abort(403);
     }
 
     /**
@@ -104,6 +104,6 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(403);
     }
 }

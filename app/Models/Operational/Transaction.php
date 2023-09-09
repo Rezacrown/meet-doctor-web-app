@@ -30,7 +30,7 @@ class Transaction extends Model
         'vat',
         'total',
         'sub_total',
-        'fee_docter',
+        'fee_doctor',
         'fee_specialist',
         'fee_hospital',
         'created_at',

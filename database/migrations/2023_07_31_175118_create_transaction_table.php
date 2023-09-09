@@ -19,7 +19,7 @@ class CreateTransactionTable extends Migration
             $table->string('vat')->nullable();
             $table->string('total')->nullable();
             $table->string('sub_total')->nullable();
-            $table->string('fee_docter')->nullable();
+            $table->string('fee_doctor')->nullable();
             $table->string('fee_specialist')->nullable();
             $table->string('fee_hospital')->nullable();
             $table->timestamps();

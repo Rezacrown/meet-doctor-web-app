@@ -15,7 +15,7 @@ class AddForeignKeysToAppointmentTable extends Migration
     {
         Schema::table('appointment', function (Blueprint $table) {
             //
-            $table->foreign('docter_id', 'fk_appointment_to_docter')->references('id')->on('docter')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('doctor_id', 'fk_appointment_to_doctor')->references('id')->on('doctor')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id', 'fk_appointment_to_users')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('consultation_id', 'fk_appointment_to_consultation')->references('id')->on('consultation')->onDelete('cascade')->onUpdate('cascade');
         });
@@ -30,7 +30,7 @@ class AddForeignKeysToAppointmentTable extends Migration
     {
         Schema::table('appointment', function (Blueprint $table) {
             //
-            $table->dropForeign('fk_appointment_to_docter');
+            $table->dropForeign('fk_appointment_to_doctor');
             $table->dropForeign('fk_appointment_to_users');
             $table->dropForeign('fk_appointment_to_consultation');
         });

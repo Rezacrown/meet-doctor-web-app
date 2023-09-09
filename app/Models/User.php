@@ -64,6 +64,7 @@ class User extends Authenticatable
     ];
 
 
+
     // relasi dengan appointment table
     public function appoinment()
     {
@@ -85,6 +86,6 @@ class User extends Authenticatable
 
     // many to many
     public function role(){
-        return $this->belongsToMany('App\Models\ManagementAccess\role');
+        return $this->belongsToMany('App\Models\ManagementAccess\role', 'role_user');
     }
 }

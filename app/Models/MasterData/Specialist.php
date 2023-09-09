@@ -33,8 +33,8 @@ class Specialist extends Model
         'deleted_at',
     ];
 
-    public function docter()
+    public function doctor()
     {
-        return $this->hasMany('App\Models\Operational\Docter', 'specialist_id');
+        return $this->hasMany('App\Models\Operational\Doctor', 'specialist_id');
     }
 }

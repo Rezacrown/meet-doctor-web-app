@@ -9,6 +9,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class DashboardController extends Controller
 {
+     public function __construct() {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.
@@ -30,9 +33,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct() {
-        $this->middleware('auth');
-    }
+
 
     public function create()
     {

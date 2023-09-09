@@ -18,7 +18,7 @@ use File;
 
 // import model
 use App\Models\User;
-use App\Models\Operational\Docter;
+use App\Models\Operational\Doctor;
 use App\Models\MasterData\Specialist;
 
 // three party packcage
@@ -39,7 +39,7 @@ class LandingController extends Controller
      */
     public function index()
     {
-        return view('pages/frontsite/landingpage/index');
+        return response()->view('pages/frontsite/landingpage/index');
     }
 
     /**

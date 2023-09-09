@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Docter extends Model
+class Doctor extends Model
 {
     use SoftDeletes;
 
     // $table berfungsi untuk declare nama table dari yang ada di database
-    public $table = 'docter';
+    public $table = 'doctor';
 
     // setiap varibel punya fungsi masing2 sesuai penamaan
     // this field must Type Date = ( YYYY-MM-DD MM-SS )
@@ -43,7 +43,7 @@ class Docter extends Model
 
     public function appointment()
     {
-        return $this->hasMany('App\Models\Operational\Appointment', 'docter_id');
+        return $this->hasMany('App\Models\Operational\Appointment', 'doctor_id');
     }
 
 }

@@ -16,7 +16,7 @@ use App\Http\Controllers\Frontsite\PaymentController;
 
 // backsite
 use App\Http\Controllers\Backsite\DashboardController;
-use App\Http\Controllers\backsite\DocterController;
+use App\Http\Controllers\backsite\DoctorController;
 use App\Http\Controllers\Backsite\HospitalPatientController;
 use App\Http\Controllers\Backsite\PermissionController;
 use App\Http\Controllers\Backsite\RoleController;
@@ -89,8 +89,8 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
     //    specilaist route
    	   Route::resource('specialist', SpecialistController::class);
 
-    //    docter route
-   	   Route::resource('docter', DocterController::class);
+    //    doctor route
+   	   Route::resource('doctor', DoctorController::class);
 
     //    Role User route
    	   Route::resource('role', RoleController::class);

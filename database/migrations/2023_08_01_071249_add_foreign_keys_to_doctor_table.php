@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToDocterTable extends Migration
+class AddForeignKeysToDoctorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddForeignKeysToDocterTable extends Migration
      */
     public function up()
     {
-        Schema::table('docter', function (Blueprint $table) {
+        Schema::table('doctor', function (Blueprint $table) {
             //
-            $table->foreign('specialist_id', 'fk_docter_to_specialist')->references('id')->on('specialist')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('specialist_id', 'fk_doctor_to_specialist')->references('id')->on('specialist')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -26,9 +26,9 @@ class AddForeignKeysToDocterTable extends Migration
      */
     public function down()
     {
-        Schema::table('docter', function (Blueprint $table) {
+        Schema::table('doctor', function (Blueprint $table) {
             //
-            $table->dropForeign('fk_docter_to_specialist');
+            $table->dropForeign('fk_doctor_to_specialist');
         });
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Edit - Docter')
+@section('title', 'Edit - Doctor')
 
 @section('content')
 <!-- BEGIN: Content-->
@@ -27,12 +27,12 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="mb-2 content-header-left col-md-6 col-12 breadcrumb-new">
-                    <h3 class="mb-0 content-header-title d-inline-block">Edit Docter</h3>
+                    <h3 class="mb-0 content-header-title d-inline-block">Edit Doctor</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Dashboard</li>
-                                <li class="breadcrumb-item">Docter</li>
+                                <li class="breadcrumb-item">Doctor</li>
                                 <li class="breadcrumb-item active">Edit</li>
                             </ol>
                         </div>
@@ -61,14 +61,14 @@
                                         <div class="card-text">
                                             <p>Please complete the input <code>required</code>, before you click the submit button.</p>
                                         </div>
-                                        <form class="form form-horizontal" action="{{ route("backsite.docter.update", [$docter->id]) }}" method="POST" enctype="multipart/form-data">
+                                        <form class="form form-horizontal" action="{{ route("backsite.doctor.update", [$doctor->id]) }}" method="POST" enctype="multipart/form-data">
 
                                                 @method('PUT')
                                                 @csrf
 
                                                 <div class="form-body">
 
-                                                    <h4 class="form-section"><i class="fa fa-edit"></i> Form Docter</h4>
+                                                    <h4 class="form-section"><i class="fa fa-edit"></i> Form Doctor</h4>
 
                                                     <div class="form-group row {{ $errors->has('specialist_id') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Specialist <code style="color:red;">required</code></label>
@@ -78,7 +78,7 @@
                                                                     class="form-control select2" required>
                                                                     <option value="{{ '' }}" disabled selected>Choose</option>
                                                                 @foreach($specialist as $key => $specialist_item)
-                                                                    <option value="{{ $specialist_item->id }}" {{ $docter->specialist_id == $specialist_item->id ? 'selected' : '' }}>{{ $specialist_item->name }}</option>
+                                                                    <option value="{{ $specialist_item->id }}" {{ $doctor->specialist_id == $specialist_item->id ? 'selected' : '' }}>{{ $specialist_item->name }}</option>
                                                                 @endforeach
                                                             </select>
 
@@ -91,7 +91,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="name">Name <code style="color:red;">required</code></label>
                                                         <div class="mx-auto col-md-9">
-                                                            <input type="text" id="name" name="name" class="form-control" placeholder="example dentist or dermatology" value="{{ old('name', isset($specialist) ? $docter->name : '') }}" autocomplete="off" required>
+                                                            <input type="text" id="name" name="name" class="form-control" placeholder="example dentist or dermatology" value="{{ old('name', isset($specialist) ? $doctor->name : '') }}" autocomplete="off" required>
 
                                                             @if($errors->has('name'))
                                                                 <p style="font-style: bold; color: red;">{{ $errors->first('name') }}</p>
@@ -102,7 +102,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="fee">Fee <code style="color:red;">required</code></label>
                                                         <div class="mx-auto col-md-9">
-                                                            <input type="text" id="fee" name="fee" class="form-control" placeholder="example fee 10000" value="{{ old('fee', isset($specialist) ? $docter->fee : '') }}" autocomplete="off" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': 'IDR ', 'placeholder': '0'" required>
+                                                            <input type="text" id="fee" name="fee" class="form-control" placeholder="example fee 10000" value="{{ old('fee', isset($specialist) ? $doctor->fee : '') }}" autocomplete="off" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': 'IDR ', 'placeholder': '0'" required>
 
                                                             @if($errors->has('fee'))
                                                                 <p style="font-style: bold; color: red;">{{ $errors->first('fee') }}</p>
@@ -130,7 +130,7 @@
                                                 </div>
 
                                                 <div class="text-right form-actions">
-                                                    <a href="{{ route('backsite.docter.index') }}" style="width:120px;" class="mr-1 text-white btn bg-blue-grey" onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
+                                                    <a href="{{ route('backsite.doctor.index') }}" style="width:120px;" class="mr-1 text-white btn bg-blue-grey" onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
                                                         <i class="ft-x"></i> Cancel
                                                     </a>
                                                     <button type="submit" style="width:120px;" class="btn btn-cyan" onclick="return confirm('Are you sure want to save this data ?')">

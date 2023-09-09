@@ -4,7 +4,7 @@ namespace App\Http\Requests\Specialist;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use App\Models\Operational\Docter;
+use App\Models\Operational\Doctor;
 use Symfony\Component\HttpFoundation;
 // use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Validation\Rule;

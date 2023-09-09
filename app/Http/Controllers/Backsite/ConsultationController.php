@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Consultation\StoreConsultationtRequest;
 use App\Http\Requests\Consultation\UpdateConsultationtRequest;
 use App\Models\MasterData\Consultation;
 use Illuminate\Http\Request;
@@ -43,9 +44,16 @@ class ConsultationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreConsultationtRequest $request)
     {
-        return abort(403);
+        // get all request from frontsite
+        $data = $request->all();
+
+        // store to database
+        $consultation = Consultation::create($data);
+
+        alert()->success('Success Message', 'Successfully added new consultation');
+        return redirect()->route('backsite.consultation.index');
     }
 
     /**

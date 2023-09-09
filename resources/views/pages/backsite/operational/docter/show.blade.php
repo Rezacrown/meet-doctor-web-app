@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Docter')
+@section('title', 'Doctor')
 
 
 @section('content')
@@ -10,30 +10,30 @@
 <table class="table table-bordered">
     <tr>
         <th>Specialist</th>
-        <td>{{ isset($docter->specialist->name) ? $docter->specialist->name : 'N/A' }}</td>
+        <td>{{ isset($doctor->specialist->name) ? $doctor->specialist->name : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Name</th>
-        <td>{{ isset($docter->name) ? $docter->name : 'N/A' }}</td>
+        <td>{{ isset($doctor->name) ? $doctor->name : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Fee</th>
-        {{-- <td>{{ isset($docter->fee) ? 'IDR '.number_format($docter->fee) : 'N/A' }}</td> --}}
+        {{-- <td>{{ isset($doctor->fee) ? 'IDR '.number_format($doctor->fee) : 'N/A' }}</td> --}}
     </tr>
     <tr>
         <th>Photo</th>
         <td>
             <img src="
-                @if ($docter->photo != "")
-                    @if(File::exists('storage/'.$docter->photo))
-                        {{ url(Storage::url($docter->photo)) }}
+                @if ($doctor->photo != "")
+                    @if(File::exists('storage/'.$doctor->photo))
+                        {{ url(Storage::url($doctor->photo)) }}
                     @else
                        {{ 'N/A' }}
                     @endif
                 @else
                     {{ 'N/A' }}
                 @endif "
-                alt="docter photo" class="users-avatar-shadow" height="100" width="100">
+                alt="doctor photo" class="users-avatar-shadow" height="100" width="100">
         </td>
     </tr>
 </table>

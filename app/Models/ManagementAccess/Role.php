@@ -50,14 +50,14 @@ class Role extends Model
 
     // relasi dengan table User
     public function user(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'role_user');
     }
 
     // dalam relasi manyToMany dan BelongsTomany, parameter kedua tidak ditulis dikarenakan sebagai contoh Setiap User akan punya banyak Role dan role juga akan punya banyak user yg menjadikannya tidak bisa dikasih spesifik collumn sebagai foreign key nya
 
     // relasi dengan table permission
     public function permission() {
-        return $this->belongsToMany('App\Models\ManagementAccess\Permission');
+        return $this->belongsToMany('App\Models\ManagementAccess\Permission', 'permission_role');
     }
 
 

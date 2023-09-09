@@ -17,7 +17,7 @@ use File;
 
 // import model
 use App\Models\User;
-use App\Models\Operational\Docter;
+use App\Models\Operational\Doctor;
 use App\Models\MasterData\Specialist;
 use APp\Models\Operational\Appointment;
 use App\Models\MasterData\Consultation;
@@ -37,7 +37,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-         return view('pages/frontsite/appointment/index');
+         return response()->view('pages/frontsite/appointment/index');
     }
 
     /**

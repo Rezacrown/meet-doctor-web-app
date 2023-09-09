@@ -124,7 +124,7 @@
                                                                     class="form-control select2" required>
                                                                     <option value="{{ '' }}" disabled selected>Choose</option>
                                                                 @foreach($type_user as $key => $type_user_item)
-                                                                    <option value="{{ $type_user_item->id }}" {{ $type_user_item->id == $user->detail_user->type_user_id ? 'selected' : '' }}>{{ $type_user_item->name }}</option>
+                                                                    <option value="{{ $type_user_item->id }}" {{ $type_user_item->id == $user?->detail_user?->type_user_id ? 'selected' : '' }}>{{ $type_user_item->name }}</option>
                                                                 @endforeach
                                                             </select>
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Docter')
+@section('title', 'Doctor')
 
 @section('content')
 
@@ -28,13 +28,13 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="mb-2 content-header-left col-md-6 col-12 breadcrumb-new">
-                    <h3 class="mb-0 content-header-title d-inline-block">docter</h3>
+                    <h3 class="mb-0 content-header-title d-inline-block">doctor</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('backsite.dashboard.index') }}">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">docter</li>
+                                <li class="breadcrumb-item active">doctor</li>
                             </ol>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
             </div>
 
             {{-- add card --}}
-            @can('docter_create')
+            @can('doctor_create')
                 <div class="content-body">
                     <section id="add-home">
                         <div class="row">
@@ -66,7 +66,7 @@
                                     <div class="card-content collapse hide">
                                         <div class="card-body card-dashboard">
 
-                                            <form class="form form-horizontal" action="{{ route('backsite.docter.store') }}"
+                                            <form class="form form-horizontal" action="{{ route('backsite.doctor.store') }}"
                                                 method="POST" enctype="multipart/form-data">
 
                                                 @csrf
@@ -177,7 +177,7 @@
             @endcan
 
             {{-- table card --}}
-            @can('docter_table')
+            @can('doctor_table')
                 <div class="content-body">
                     <section id="table-home">
                         <!-- Zero configuration table -->
@@ -213,15 +213,15 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @forelse($docter as $key => $docter_item)
-                                                            <tr data-entry-id="{{ $docter_item->id }}">
-                                                                <td>{{ isset($docter_item->created_at) ? date('d/m/Y H:i:s', strtotime($docter_item->created_at)) : '' }}
+                                                        @forelse($doctor as $key => $doctor_item)
+                                                            <tr data-entry-id="{{ $doctor_item->id }}">
+                                                                <td>{{ isset($doctor_item->created_at) ? date('d/m/Y H:i:s', strtotime($doctor_item->created_at)) : '' }}
                                                                 </td>
-                                                                <td>{{ $docter_item->specialist->name ?? '' }}</td>
-                                                                <td>{{ $docter_item->name ?? '' }}</td>
-                                                                <td>{{ 'IDR ' . number_format($docter_item->fee) ?? '' }}</td>
+                                                                <td>{{ $doctor_item->specialist->name ?? '' }}</td>
+                                                                <td>{{ $doctor_item->name ?? '' }}</td>
+                                                                <td>{{ 'IDR ' . number_format($doctor_item->fee) ?? '' }}</td>
                                                                 <td><a data-fancybox="gallery"
-                                                                        data-src="{{ request()->getSchemeAndHttpHost() . '/storage' . '/' . $docter_item->photo }}"
+                                                                        data-src="{{ request()->getSchemeAndHttpHost() . '/storage' . '/' . $doctor_item->photo }}"
                                                                         class="blue accent-4">Show</a></td>
                                                                 <td class="text-center">
 
@@ -232,26 +232,26 @@
                                                                             aria-expanded="false">Action</button>
                                                                         <div class="dropdown-menu">
 
-                                                                            @can('docter_show')
+                                                                            @can('doctor_show')
                                                                                 <a href="#mymodal"
-                                                                                    data-remote="{{ route('backsite.docter.show', $docter_item->id) }}"
+                                                                                    data-remote="{{ route('backsite.doctor.show', $doctor_item->id) }}"
                                                                                     data-toggle="modal" data-target="#mymodal"
-                                                                                    data-title="docter Detail"
+                                                                                    data-title="doctor Detail"
                                                                                     class="dropdown-item">
                                                                                     Show
                                                                                 </a>
                                                                             @endcan
 
-                                                                            @can('docter_edit')
+                                                                            @can('doctor_edit')
                                                                                 <a class="dropdown-item"
-                                                                                    href="{{ route('backsite.docter.edit', $docter_item->id) }}">
+                                                                                    href="{{ route('backsite.doctor.edit', $doctor_item->id) }}">
                                                                                     Edit
                                                                                 </a>
                                                                             @endcan
 
-                                                                            @can('docter_delete')
+                                                                            @can('doctor_delete')
                                                                                 <form
-                                                                                    action="{{ route('backsite.docter.destroy', $docter_item->id) }}"
+                                                                                    action="{{ route('backsite.doctor.destroy', $doctor_item->id) }}"
                                                                                     method="POST"
                                                                                     onsubmit="return confirm('Are you sure want to delete this data ?');">
                                                                                     <input type="hidden" name="_method"

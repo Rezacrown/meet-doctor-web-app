@@ -77,7 +77,19 @@ class ConfigPaymentController extends Controller
      */
     public function update(UpdateConfigPaymentRequest $request, ConfigPayment $config_payment)
     {
-        $config_payment->update($request->all());
+        // $config_payment->update($request->all());
+
+        // get all request from frontsite
+        $data = $request->all();
+
+        // Re-format before push to table
+        $data['fee'] = str_replace(',', '', $data['fee']);
+        $data['fee'] = str_replace('IDR ', '', $data['fee']);
+        $data['vat'] = str_replace(',', '', $data['vat']);
+
+        // update to database
+        $config_payment->update($data);
+
 
          alert()->success('Success Message', 'Successfully updated config payment');
         return redirect()->route('backsite.config_payment.index');

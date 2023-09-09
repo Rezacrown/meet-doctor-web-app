@@ -26,7 +26,7 @@ class Appointment extends Model
 
     // variabel $fillable berfunsgi untuk menentukan field yang boleh diisi
     protected $fillable = [
-        'docter_id',
+        'doctor_id',
         'user_id',
         'consultation_id',
         'level',
@@ -38,10 +38,10 @@ class Appointment extends Model
         'deleted_at',
     ];
 
-     // relasi dengan docter table
-    public function docter()
+     // relasi dengan doctor table
+    public function doctor()
     {
-        return $this->belongsTo('App\Models\Operational\Docter', 'docter_id', 'id');
+        return $this->belongsTo('App\Models\Operational\Doctor', 'doctor_id', 'id');
     }
 
     // relasi dengan consultation table
