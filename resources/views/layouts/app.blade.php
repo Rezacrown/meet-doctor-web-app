@@ -16,6 +16,9 @@
     @include('includes.backsite.style')
     @stack('after-style')
 
+    {{-- bootrap --}}
+    {{-- <link rel="stylesheet" href="{{ url('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">') }}"> --}}
+
 </head>
 
 <body class="vertical-layout vertical-menu 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu"
@@ -27,19 +30,18 @@
     @include('components.backsite.header')
     @include('components.backsite.sidebar')
 
-    <div class="app-content content"></div>
-    <div class="content-overlay">
-        <div class="content-wrapper">
-            @yield('content')
-        </div>
-    </div>
-    </div>
+
+    @yield('content')
+
 
     @include('components.backsite.footer')
 
     @stack('before-script')
     @include('includes.backsite.script')
     @stack('after-script')
+
+    {{-- boostrap --}}
+    {{-- <script src="{{ url('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>', []) }}"></script> --}}
 
 </body>
 

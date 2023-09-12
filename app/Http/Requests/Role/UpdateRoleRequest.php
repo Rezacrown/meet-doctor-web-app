@@ -29,7 +29,7 @@ class UpdateRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'max' => 255, Rule::unique('role')->ignore($this->role)],
+            'title' => ['required', 'string', 'max:255', Rule::unique('role')->ignore($this->role)],
         ];
     }
 }

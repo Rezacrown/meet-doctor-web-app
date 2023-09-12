@@ -23,6 +23,8 @@ use App\Http\Controllers\Backsite\RoleController;
 use App\Http\Controllers\backsite\SpecialistController;
 use App\Http\Controllers\backsite\TypeUserController;
 use App\Http\Controllers\Backsite\UserController;
+use App\Http\Controllers\Frontsite\ProfileController;
+use App\Http\Controllers\Frontsite\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,9 @@ use App\Http\Controllers\Backsite\UserController;
 |
 */
 
+// Route::get('/', function () {
+//     return response()->view('welcome');
+// });
 
 // Route::resource fungsi sama seperti GET, POST DLL, hanya saja itu akan otomatis mencocokan http methodnya sesuai dengan jika menggunakan php artisan make:controller --resource
 // dipisah dari group karena ini tidak butuh authentikasi untuk akses landing pagenya
@@ -47,7 +52,10 @@ Route::resource('/', LandingController::class);
 // contoh groping route ->
 
 // ini adalah Front site
-Route::group(['middleware' => ['auth::sactum' => 'verified']], function (){
+Route::group(['middleware' => ['auth::sactum' => 'verified']], function () {
+
+    // profile page
+    Route::resource('profile', ProfileController::class)->names('profile');
 
     // Appointment Page
     Route::resource('appointment', AppointmentController::class);
@@ -61,12 +69,8 @@ Route::group(['middleware' => ['auth::sactum' => 'verified']], function (){
 
 
 
-
     // sukses route
-    // Route::get('sukses', function () {
-
-    //     return response()->view('pages.frontsite.success.signup-success');
-    // });
+    Route::resource('register_success', RegisterController::class)->name('index', 'register_success');
 
     // Route::get('sukses2', function () {
 
@@ -75,50 +79,52 @@ Route::group(['middleware' => ['auth::sactum' => 'verified']], function (){
 
 });
 
+
+
+
 // ini Back site
-Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth::sactum' => 'verified']], function (){
+Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth::sactum' => 'verified']], function () {
 
     // dashboard Route
-        // wajib kasih names untuk nama routingnya, dan cara aksesnya adalah dengan name prefix + name route + nama method contoh
-        // backsite.dashboard.index
-   	   Route::resource('dashboard', DashboardController::class);
+    // wajib kasih names untuk nama routingnya, dan cara aksesnya adalah dengan name prefix + name route + nama method contoh
+    // backsite.dashboard.index
+    Route::resource('dashboard', DashboardController::class);
 
     //    type_user route
-   	   Route::resource('type_user', TypeUserController::class);
+    Route::resource('type_user', TypeUserController::class);
 
     //    specilaist route
-   	   Route::resource('specialist', SpecialistController::class);
+    Route::resource('specialist', SpecialistController::class);
 
     //    doctor route
-   	   Route::resource('doctor', DoctorController::class);
+    Route::resource('doctor', DoctorController::class);
 
     //    Role User route
-   	   Route::resource('role', RoleController::class);
+    Route::resource('role', RoleController::class);
 
     //    Permission route
-   	   Route::resource('permission', PermissionController::class);
+    Route::resource('permission', PermissionController::class);
 
     //  Permission route
-   	   Route::resource('permission', PermissionController::class);
+    Route::resource('permission', PermissionController::class);
 
-       //    User route
-   	   Route::resource('user', UserController::class);
+    //    User route
+    Route::resource('user', UserController::class);
 
-       //   Config_payment route
-   	   Route::resource('config_payment', ConfigPaymentController::class);
+    //   Config_payment route
+    Route::resource('config_payment', ConfigPaymentController::class);
 
-       //  consultation route
-   	   Route::resource('consultation', ConsultationController::class);
+    //  consultation route
+    Route::resource('consultation', ConsultationController::class);
 
-       //  Hospital patient route
-   	   Route::resource('hospital_patient', HospitalPatientController::class);
+    //  Hospital patient route
+    Route::resource('hospital_patient', HospitalPatientController::class);
 
-       // report appointment route
-   	   Route::resource('appointment', ReportAppointmentController::class);
+    // report appointment route
+    Route::resource('appointment', ReportAppointmentController::class);
 
-        // report transaction route
+    // report transaction route
     Route::resource('transaction', ReportTransactionController::class);
-
 });
 
 

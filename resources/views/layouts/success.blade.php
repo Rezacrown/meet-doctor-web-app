@@ -19,7 +19,7 @@
 <body>
 
     {{-- header --}}
-    @include('components.frontsite.header')
+    {{-- @include('components.frontsite.header') --}}
 
     {{-- isi content --}}
         @yield('content')

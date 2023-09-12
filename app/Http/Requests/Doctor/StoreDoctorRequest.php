@@ -30,9 +30,9 @@ class StoreDoctorRequest extends FormRequest
     {
         return [
             'specialist_id' => ['required', 'integer',],
-            'name' => ['required', 'string', 'max' => 255],
-            'fee' => ['required', 'string', 'max' => 255],
-            'photo' => ['nullable', 'string', 'max:10000'],
+            'name' => ['required', 'string', 'max:255'],
+            'fee' => ['required', 'string', 'max:255'],
+            'photo' => ['nullable', 'mimes:jpeg,svg,png', 'max:10000'],
             // cara lain selain pakai tanda => (panah) adlaah langsung seperti max:1000
         ];
     }

@@ -210,5 +210,10 @@ class DoctorController extends Controller
 
 
         return redirect()->back();
+
+        // request()->is();
+        // atau
+        // Request::is();
+        // fungsinya adalah sama hanya saja untuk snipset di bladenya lebih baik pakai yang static saja tetapi yang request()->is() tetap berfungsi kok di blade nya
     }
 }

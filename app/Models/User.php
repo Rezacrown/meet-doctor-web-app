@@ -85,7 +85,8 @@ class User extends Authenticatable
 
 
     // many to many
-    public function role(){
+    public function role()
+    {
         return $this->belongsToMany('App\Models\ManagementAccess\role', 'role_user');
     }
 }

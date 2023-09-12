@@ -27,7 +27,7 @@ class Specialist extends Model
     // variabel $fillable berfunsgi untuk menentukan field yang boleh diisi
     protected $fillable = [
         'name',
-        'pricing',
+        'price',
         'created_at',
         'updated_at',
         'deleted_at',

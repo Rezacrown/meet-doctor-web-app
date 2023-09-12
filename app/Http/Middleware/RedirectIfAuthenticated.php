@@ -19,6 +19,7 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
+        // cek apakah argumen empty atau ada isinya
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {

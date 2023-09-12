@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Gate;
 class UserController extends Controller
 {
 
-       public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
     /**
@@ -37,7 +38,6 @@ class UserController extends Controller
         $roles = Role::all()->pluck('title', 'id');
 
         return response()->view('pages.backsite.management-access.user.index', compact('user', 'roles', 'type_user'));
-
     }
 
     /**
@@ -108,10 +108,10 @@ class UserController extends Controller
 
         $role = Role::all()->pluck('title', 'id');
         $type_user = TypeUser::orderBy('name', 'asc')->get();
-        $user->load('role');
+        $user->load(['role']);
 
 
-        // dd($user);
+        // dd();
 
         return response()->view('pages.backsite.management-access.user.edit', compact('user', 'role', 'type_user'));
     }
@@ -134,8 +134,12 @@ class UserController extends Controller
         // update roles
         $user->role()->sync($request->input('role', []));
 
+
         // save to detail user , to set type user
-        $detail_user = DetailUser::find($user['id']);
+        // $detail_user = DetailUser::find($user['id']);
+        $detail_user = DetailUser::where('user_id', $user['id'])->get()->first();
+        // var_dump($detail_user);
+
         $detail_user->type_user_id = $request['type_user_id'];
         $detail_user->save();
 
@@ -152,7 +156,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
+
         $user->forceDelete();
 
         alert()->success('Success Message', 'Successfully deleted user');

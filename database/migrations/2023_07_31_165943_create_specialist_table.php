@@ -16,7 +16,7 @@ class CreateSpecialistTable extends Migration
         Schema::create('specialist', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('pricing');
+            $table->string('price');
             $table->timestamps();
             $table->softDeletes();
         });

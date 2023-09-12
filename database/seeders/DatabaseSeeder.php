@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        // sesuaikan dengan logic aplikasi yang mana dulu data yang dibutuhkan untuk setiap table, karena akan dilakukan generate data seedernya dari atas ke bawah, oleh karena itu flow data seed harus jelas:(●'◡'●))
         $this->call([
             // SpecialistSeeder::class,
             // TypeUserSeeder::class,

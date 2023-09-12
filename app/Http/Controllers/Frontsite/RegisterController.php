@@ -1,17 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Backsite;
+namespace App\Http\Controllers\Frontsite;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
-use RealRashid\SweetAlert\Facades\Alert;
 
-
-class DashboardController extends Controller
+class RegisterController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,18 +20,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('dashboard_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $user = Auth::user()->name;
-        // alert('title', 'ini adalah sweet alert');
-
-        // return response(Auth::user()->role);
-        // if($user){
-        //     alert("Selamat Datang $user");
-        // }
-
-
-        return response()->view('pages.backsite.dashboard.index');
+        return response()->view('pages.frontsite.success.signup-success');
     }
 
     /**
@@ -43,11 +28,9 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function create()
     {
-        return abort(404);
+        return abort(403);
     }
 
     /**
@@ -58,7 +41,7 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        return abort(404);
+        return abort(403);
     }
 
     /**
@@ -69,7 +52,7 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        return abort(404);
+        return abort(403);
     }
 
     /**
@@ -80,7 +63,7 @@ class DashboardController extends Controller
      */
     public function edit($id)
     {
-        return abort(404);
+        return abort(403);
     }
 
     /**
@@ -92,7 +75,7 @@ class DashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return abort(404);
+        return abort(403);
     }
 
     /**
@@ -103,6 +86,6 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        return abort(404);
+        return abort(403);
     }
 }

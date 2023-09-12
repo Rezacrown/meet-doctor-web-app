@@ -12,7 +12,7 @@
 
             {{-- error --}}
             @if ($errors->any())
-                <div class="alert bg-danger alert-dismissible mb-2" role="alert">
+                <div class="mb-2 alert bg-danger alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -27,8 +27,8 @@
 
             {{-- breadcumb --}}
             <div class="content-header row">
-                <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">User</h3>
+                <div class="mb-2 content-header-left col-md-6 col-12 breadcrumb-new">
+                    <h3 class="mb-0 content-header-title d-inline-block">User</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
@@ -48,12 +48,12 @@
                             <div class="col-12">
 
                                 <div class="card">
-                                    <div class="card-header bg-success text-white">
+                                    <div class="text-white card-header bg-success">
                                         <a data-action="collapse">
-                                            <h4 class="card-title text-white">Add Data</h4>
+                                            <h4 class="text-white card-title">Add Data</h4>
                                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
-                                                <ul class="list-inline mb-0">
+                                                <ul class="mb-0 list-inline">
                                                     <li><a data-action="collapse"><i class="ft-plus"></i></a></li>
                                                     <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                                                 </ul>
@@ -75,7 +75,7 @@
 
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="name">Name <code style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
+                                                        <div class="mx-auto col-md-9">
                                                             <input type="text" id="name" name="name" class="form-control" placeholder="example John Doe or Jane" value="{{old('name')}}" autocomplete="off" required>
 
                                                             @if($errors->has('name'))
@@ -86,7 +86,7 @@
 
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="email">Email <code style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
+                                                        <div class="mx-auto col-md-9">
                                                             <input type="text" id="email" name="email" class="form-control" placeholder="example People@mail.com or Human@mail.com" value="{{old('email')}}" autocomplete="off" data-inputmask="'alias': 'email'" required>
 
                                                             @if($errors->has('email'))
@@ -97,9 +97,9 @@
 
                                                     <div class="form-group row {{ $errors->has('role') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Role <code style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
+                                                        <div class="mx-auto col-md-9">
                                                             <label for="role">
-                                                                <span class="btn btn-warning btn-sm select-all">{{ 'Select all' }}</span>
+                                                                <span class="select-all btn btn-warning btn-sm">{{ 'Select all' }}</span>
                                                                 <span class="btn btn-warning btn-sm deselect-all">{{ 'Delete all' }}</span>
                                                             </label>
 
@@ -121,7 +121,7 @@
 
                                                     <div class="form-group row {{ $errors->has('type_user_id') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Type User <code style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
+                                                        <div class="mx-auto col-md-9">
                                                             <select name="type_user_id"
                                                                     id="type_user_id"
                                                                     class="form-control select2" required>
@@ -139,7 +139,7 @@
 
                                                 </div>
 
-                                                <div class="form-actions text-right">
+                                                <div class="text-right form-actions">
                                                     <button type="submit" style="width:120px;" class="btn btn-cyan" onclick="return confirm('Are you sure want to save this data ?')">
                                                         <i class="la la-check-square-o"></i> Submit
                                                     </button>
@@ -168,7 +168,7 @@
                                         <h4 class="card-title">User List</h4>
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
-                                            <ul class="list-inline mb-0">
+                                            <ul class="mb-0 list-inline">
                                                 <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                                 <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                                                 <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
@@ -199,15 +199,15 @@
                                                                 <td>{{ $user_item->email ?? '' }}</td>
                                                                 <td style="width:200px;">
                                                                     @foreach($user_item->role as $key => $item)
-                                                                        <span class="badge bg-yellow text-dark mr-1 mb-1">{{ $item->title }}</span>
+                                                                        <span class="mb-1 mr-1 badge bg-yellow text-dark">{{ $item->title }}</span>
                                                                     @endforeach
                                                                 </td>
                                                                 <td style="width:200px;">
-                                                                    <span class="badge bg-success mr-1 mb-1">{{ $user_item->detail_user->type_user->name ?? '' }}</span>
+                                                                    <span class="mb-1 mr-1 badge bg-success">{{ $user_item->detail_user->type_user->name ?? 'N/A' }}</span>
                                                                 </td>
                                                                 <td class="text-center">
 
-                                                                    <div class="btn-group mr-1 mb-1">
+                                                                    <div class="mb-1 mr-1 btn-group">
                                                                         <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                                                                         <div class="dropdown-menu">
                                                                             @can('user_show')
@@ -321,7 +321,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <i class="fa fa-spinner fa spin"></i>
+                    <i class="fa fa-spinner spin"></i>
                 </div>
             </div>
         </div>

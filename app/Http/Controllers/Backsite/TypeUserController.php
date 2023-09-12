@@ -26,7 +26,7 @@ class TypeUserController extends Controller
     public function index()
     {
         abort_if(Gate::denies('type_user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
+
         // jika memakai all maka akan get dulu di database lalu disortir di bagian phpnya
         // $typeUser = TypeUser::all()->sortBy('id', SORT_DESC, true);
 
@@ -35,10 +35,10 @@ class TypeUserController extends Controller
         // yg $typeuser diatas mirip dengan query Db dibawah
         // $query = DB::table('type_user')->get();
 
-        $typeUser = TypeUser::get();
+        $type_user = TypeUser::get();
         // return response($typeUser);
 
-        return response()->view('pages.backsite.management-access.type-user.index', compact('typeUser'));
+        return response()->view('pages.backsite.management-access.type-user.index', compact('type_user'));
     }
 
     /**

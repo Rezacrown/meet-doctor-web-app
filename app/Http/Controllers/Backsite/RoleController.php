@@ -23,7 +23,8 @@ use Illuminate\Support\Facades\Gate;
 class RoleController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -37,7 +38,10 @@ class RoleController extends Controller
         abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $role = Role::orderBy('created_at', 'desc')->get();
+        // $role = Role::all()->load('permission');
 
+
+        // return response($role);
         return response()->view('pages.backsite.management-access.role.index', compact('role'));
     }
 
@@ -61,7 +65,7 @@ class RoleController extends Controller
     {
         $role = Role::create($request->all());
 
-         alert()->success('Success Message', 'Successfully added new role');
+        alert()->success('Success Message', 'Successfully added new role');
         return redirect()->route('backsite.role.index');
     }
 
@@ -78,15 +82,14 @@ class RoleController extends Controller
         // $data = $role->query()->where('id', $role->id());
 
         // load untuk ambil relasi di data tunggal
-        $data = $role->load('permission');
+        $role->load('permission');
 
         // sedangkan with digunankan untuk ambil data relasi dengan jumlah banyak sekaligus
         // $data = $role->with('permission')->get();
 
         // return response($data);
 
-        return response()->view('pages.backsite.management-access.role.index', ['role' => $data]);
-
+        return response()->view('pages.backsite.management-access.role.show', ['role' => $role]);
     }
 
     /**
@@ -101,10 +104,15 @@ class RoleController extends Controller
 
         // get all permission
         $permission = Permission::all();
+
         // get data relation from $role , this will be use to validate input ( maybe )
         $role->load('permission');
 
-        return response()->view('pages.backsite.management-access.role.index', compact('role', 'permission') );
+
+        // $isi = count($role->permission);
+
+        // return response($role);
+        return response()->view('pages.backsite.management-access.role.edit', compact('role', 'permission'));
     }
 
     /**
@@ -136,10 +144,10 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
-         $role->forceDelete();
 
-        alert()->success('Success Message','Successfully deleted role');
-        return response()->back();
+        $role->forceDelete();
+
+        alert()->success('Success Message', 'Successfully deleted role');
+        return redirect()->back();
     }
 }

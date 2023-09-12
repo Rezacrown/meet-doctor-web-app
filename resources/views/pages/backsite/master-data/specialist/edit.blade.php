@@ -4,7 +4,7 @@
 @section('title', 'Edit - Specialist')
 
 @section('content')
-<!-- BEGIN: Content-->
+    <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
@@ -59,50 +59,71 @@
                                 <div class="card-content collpase show">
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <p>Please complete the input <code>required</code>, before you click the submit button.</p>
+                                            <p>Please complete the input <code>required</code>, before you click the submit
+                                                button.</p>
                                         </div>
-                                        <form class="form form-horizontal" action="{{ route("backsite.specialist.update", [$specialist->id]) }}" method="POST" enctype="multipart/form-data">
 
-                                                @method('PUT')
-                                                @csrf
+                                        <form class="form form-horizontal"
+                                            action="{{ route('backsite.specialist.update', [$specialist->id]) }}"
+                                            method="POST" enctype="multipart/form-data">
 
-                                                <div class="form-body">
+                                            @csrf
+                                            @method('PUT')
 
-                                                    <h4 class="form-section"><i class="fa fa-edit"></i> Form Specialist</h4>
+                                            <div class="form-body">
 
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="name">Name <code style="color:red;">required</code></label>
-                                                        <div class="mx-auto col-md-9">
-                                                            <input type="text" id="name" name="name" class="form-control" placeholder="example dentist or dermatology" value="{{ old('name', isset($specialist) ? $specialist->name : '') }}" autocomplete="off" required>
+                                                <h4 class="form-section"><i class="fa fa-edit"></i> Form Specialist</h4>
 
-                                                            @if($errors->has('name'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('name') }}</p>
-                                                            @endif
-                                                        </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="name">Name <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="mx-auto col-md-9">
+                                                        <input type="text" id="name" name="name"
+                                                            class="form-control"
+                                                            placeholder="example dentist or dermatology"
+                                                            value="{{ old('name', isset($specialist) ? $specialist->name : '') }}"
+                                                            autocomplete="off" required>
+
+                                                        @if ($errors->has('name'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('name') }}</p>
+                                                        @endif
                                                     </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="price">Price <code style="color:red;">required</code></label>
-                                                        <div class="mx-auto col-md-9">
-                                                            <input type="text" id="price" name="price" class="form-control" placeholder="example price 10000" value="{{ old('price', isset($specialist) ? $specialist->price : '') }}" autocomplete="off" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': 'IDR ', 'placeholder': '0'" required>
-
-                                                            @if($errors->has('price'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('price') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
                                                 </div>
 
-                                                <div class="text-right form-actions">
-                                                    <a href="{{ route('backsite.specialist.index') }}" style="width:120px;" class="mr-1 text-white btn bg-blue-grey" onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
-                                                        <i class="ft-x"></i> Cancel
-                                                    </a>
-                                                    <button type="submit" style="width:120px;" class="btn btn-cyan" onclick="return confirm('Are you sure want to save this data ?')">
-                                                        <i class="la la-check-square-o"></i> Submit
-                                                    </button>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="price">Price <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="mx-auto col-md-9">
+                                                        <input type="text" id="price" name="price"
+                                                            class="form-control" placeholder="example price 10000"
+                                                            value="{{ old('price', isset($specialist) ? $specialist->price : '') }}"
+                                                            autocomplete="off"
+                                                            data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': 'IDR ', 'placeholder': '0'"
+                                                            required>
+
+                                                        @if ($errors->has('price'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('price') }}</p>
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </form>
+
+                                            </div>
+
+                                            <div class="text-right form-actions">
+                                                <a href="{{ route('backsite.specialist.index') }}" style="width:120px;"
+                                                    class="mr-1 text-white btn bg-blue-grey"
+                                                    onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
+                                                    <i class="ft-x"></i> Cancel
+                                                </a>
+                                                <button type="submit" style="width:120px;" class="btn btn-cyan"
+                                                    onclick="return confirm('Are you sure want to save this data ?')">
+                                                    <i class="la la-check-square-o"></i> Submit
+                                                </button>
+                                            </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -113,13 +134,12 @@
 
         </div>
     </div>
-<!-- END: Content-->
+    <!-- END: Content-->
 
 @endsection
 
 
 @push('after-script')
-
     {{-- inputmask --}}
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/jquery.inputmask.js') }}"></script>
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/inputmask.js') }}"></script>
@@ -130,5 +150,4 @@
             $(":input").inputmask();
         });
     </script>
-
 @endpush

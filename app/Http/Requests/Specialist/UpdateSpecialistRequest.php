@@ -31,7 +31,7 @@ class UpdateSpecialistRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', Rule::unique('specialist')->ignore($this->specialist)],
             // bisa pakai Rule::unique() untuk validasi
-            'pricing' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'string', 'max:255'],
         ];
     }
 }

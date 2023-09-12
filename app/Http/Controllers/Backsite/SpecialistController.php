@@ -92,7 +92,7 @@ class SpecialistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Specialist $specialist)
     {
         abort_if(Gate::denies('specialist_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -119,6 +119,7 @@ class SpecialistController extends Controller
         $specialist->update($data);
 
         alert()->success('Success Message', 'Successfully Updated specialist');
+
         return redirect()->route('backsite.specialist.index');
     }
 
@@ -132,7 +133,7 @@ class SpecialistController extends Controller
     {
 
         abort_if(Gate::denies('specialist_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
+
         $specialist->forceDelete();
 
         alert()->success('Success Message', 'Successfully deleted specialist');
