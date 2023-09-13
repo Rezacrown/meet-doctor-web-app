@@ -10,7 +10,7 @@
                 <li class="nav-item">
                     <a class="navbar-brand" href="{{route('backsite.dashboard.index')}}" ><img
                             class="brand-logo" alt="modern admin logo"
-                            src="{{ asset('/assets/backsite/app-assets/images/logo/logo.png') }}">
+                            src="{{ asset('/assets/backsite/app-assets/images/logo/logo.png')  }}">
                         <h3 class="brand-text">Back Office</h3>
                     </a>
                 </li>
@@ -106,7 +106,7 @@
                             href="#" data-toggle="dropdown"><span
                                 class="mr-1 user-name text-bold-700">{{ Auth::user()->name }}</span><span
                                 class="avatar avatar-online"><img
-                                    src="{{ asset('/assets/backsite/app-assets/images/portrait/small/avatar-s-19.png') }}"
+                                    src="{{ Auth::user()->detail_user?->photo ? url(Storage::url(Auth::user()->detail_user?->photo)) :  asset('/assets/backsite/app-assets/images/portrait/small/avatar-s-19.png') }}"
                                     alt="avatar"><i></i></span></a>
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
                                 href="user-profile.html"><i class="ft-user"></i> Edit Profile</a>

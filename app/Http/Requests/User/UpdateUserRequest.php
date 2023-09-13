@@ -35,8 +35,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['string', 'email', Rule::unique('users')->ignore($this->User)],
-            'email' => ['required', 'string', 'email',]
+            'email' => ['required', 'string', 'email', Rule::unique('users')->ignore($this->route('user'))],
+            // 'email' => ['required', 'string', 'email',]
 
             // Rule:: unique only work for other record id
 

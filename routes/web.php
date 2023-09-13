@@ -55,28 +55,22 @@ Route::resource('/', LandingController::class);
 Route::group(['middleware' => ['auth::sactum' => 'verified']], function () {
 
     // profile page
-    Route::resource('profile', ProfileController::class)->names('profile');
+    Route::resource('profile', ProfileController::class)->names('profiles');
 
     // Appointment Page
-    Route::resource('appointment', AppointmentController::class);
+    Route::get('appointment/doctor/{id}', [AppointmentController::class, 'appointment'])->name('appointment.doctor');
+    Route::resource('appointment', AppointmentController::class)->names('appointment');
 
     // Payment Page
+    Route::get('payment_success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('payment/appointment/{id}', [PaymentController::class, 'payment'])->name('payment.appointment');
     Route::resource('payment', PaymentController::class);
-    // dashboard
-    // Route::resource('payment', function () {
-    //     return view('pages.frontsite.dashboard.index');
-    // });
 
 
 
     // sukses route
+    // Route::get('payment_success', [SuccessPayment::class, 'success_checkout'])->name('payment.success');
     Route::resource('register_success', RegisterController::class)->name('index', 'register_success');
-
-    // Route::get('sukses2', function () {
-
-    //     return response()->view('pages.frontsite.success.payment-success');
-    // });
-
 });
 
 

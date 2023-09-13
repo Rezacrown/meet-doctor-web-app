@@ -11,12 +11,12 @@
 
             <!-- Detail Doctor  -->
             <div class="lg:w-5/12 lg:border-r h-72 lg:h-[30rem] flex flex-col items-center justify-center text-center">
-                <img src="{{ asset('assets/frontsite/images/doctor-1.png') }}"
+                <img src="{{ Url(Storage::url($doctor->photo)) ?? asset('assets/frontsite/images/doctor-1.png') }}"
                     class="inline-block object-cover object-top w-32 h-32 bg-center rounded-full" alt="doctor-1" />
                 <div class="text-[#1E2B4F] text-lg font-semibold mt-4">
-                    Dr. Galih Pratama
+                    Dr. {{ $doctor->name }}
                 </div>
-                <div class="text-[#AFAEC3] mt-1">Cardiologist</div>
+                <div class="text-[#AFAEC3] mt-1">{{ $doctor->specialist->name }}</div>
                 <div class="flex items-center justify-center mt-4 gap-x-2">
                     <div class="flex items-center gap-2">
                         {{-- rating star --}}
@@ -35,34 +35,35 @@
                     New Appointment
                 </h2>
 
-                <form action="" class="mt-8 space-y-5">
+                <form action="{{ route('appointment.store') }}" method="POST" enctype="multipart/form-data"
+                    class="mt-8 space-y-5">
+                    @csrf
+                    @method('POST')
+
+
                     <label class="block">
-                        <select name="topic" id="topic"
+
+
+                        <select name="consultation_id" id="consultation_id"
                             class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
                             placeholder="Topik Konsultasi">
 
-                            <option disabled selected class="hidden">
-                                Topik Konsultasi
-                            </option>
-                            <option value="Jantung Sesak">Jantung Sesak</option>
-                            <option value="Tekanan Darah Tinggi">
-                                Tekanan Darah Tinggi
-                            </option>
-                            <option value="Gangguan Irama Jantung">
-                                Gangguan Irama Jantung
-                            </option>
+                            @foreach ($consultation as $key => $consultation_item)
+                                <option value="{{ $consultation_item->id }}">{{ $consultation_item->name }}</option>
+                            @endforeach
 
                         </select>
+
                     </label>
 
                     <label class="block">
-                        <select name="level" id="level"
+                        <select name="level_id" id="level_id"
                             class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
                             placeholder="Level">
-                            <option value="" disabled selected class="hidden">Level</option>
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
+                            <option value="1" selected class="hidden">Level</option>
+                            <option value="1">Low</option>
+                            <option value="2">Medium</option>
+                            <option value="3">High</option>
                         </select>
                     </label>
 
@@ -100,9 +101,13 @@
                         </span>
                     </label>
 
+                    {{-- value doctor id --}}
+                    <input type="hidden" name="doctor_id" value="{{ $doctor->id ?? '' }}">
+                    {{-- value doctor id end --}}
+
                     <div class="grid">
-                        <a href="/payment"
-                            class="bg-[#0D63F3] rounded-full mt-5 text-white text-lg font-medium px-10 py-3 text-center">Continue</a>
+                        <button
+                            class="bg-[#0D63F3] rounded-full mt-5 text-white text-lg font-medium px-10 py-3 text-center">Continue</button>
                     </div>
                 </form>
             </div>

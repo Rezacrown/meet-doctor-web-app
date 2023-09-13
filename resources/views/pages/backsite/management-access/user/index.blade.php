@@ -5,7 +5,7 @@
 
 @section('content')
 
-<!-- BEGIN: Content-->
+    <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
@@ -51,7 +51,8 @@
                                     <div class="text-white card-header bg-success">
                                         <a data-action="collapse">
                                             <h4 class="text-white card-title">Add Data</h4>
-                                            <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                            <a class="heading-elements-toggle"><i
+                                                    class="la la-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
                                                 <ul class="mb-0 list-inline">
                                                     <li><a data-action="collapse"><i class="ft-plus"></i></a></li>
@@ -64,75 +65,96 @@
                                     <div class="card-content collapse hide">
                                         <div class="card-body card-dashboard">
 
-                                            <form class="form form-horizontal" action="{{ route('backsite.user.store') }}" method="POST" enctype="multipart/form-data">
+                                            <form class="form form-horizontal" action="{{ route('backsite.user.store') }}"
+                                                method="POST" enctype="multipart/form-data">
 
                                                 @csrf
 
                                                 <div class="form-body">
                                                     <div class="form-section">
-                                                        <p>Please complete the input <code>required</code>, before you click the submit button.</p>
+                                                        <p>Please complete the input <code>required</code>, before you click the
+                                                            submit button.</p>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="name">Name <code style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="name">Name <code
+                                                                style="color:red;">required</code></label>
                                                         <div class="mx-auto col-md-9">
-                                                            <input type="text" id="name" name="name" class="form-control" placeholder="example John Doe or Jane" value="{{old('name')}}" autocomplete="off" required>
+                                                            <input type="text" id="name" name="name"
+                                                                class="form-control" placeholder="example John Doe or Jane"
+                                                                value="{{ old('name') }}" autocomplete="off" required>
 
-                                                            @if($errors->has('name'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('name') }}</p>
+                                                            @if ($errors->has('name'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('name') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="email">Email <code style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="email">Email <code
+                                                                style="color:red;">required</code></label>
                                                         <div class="mx-auto col-md-9">
-                                                            <input type="text" id="email" name="email" class="form-control" placeholder="example People@mail.com or Human@mail.com" value="{{old('email')}}" autocomplete="off" data-inputmask="'alias': 'email'" required>
+                                                            <input type="text" id="email" name="email"
+                                                                class="form-control"
+                                                                placeholder="example People@mail.com or Human@mail.com"
+                                                                value="{{ old('email') }}" autocomplete="off"
+                                                                data-inputmask="'alias': 'email'" required>
 
-                                                            @if($errors->has('email'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('email') }}</p>
+                                                            @if ($errors->has('email'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('email') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row {{ $errors->has('role') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Role <code style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control">Role <code
+                                                                style="color:red;">required</code></label>
                                                         <div class="mx-auto col-md-9">
                                                             <label for="role">
-                                                                <span class="select-all btn btn-warning btn-sm">{{ 'Select all' }}</span>
-                                                                <span class="btn btn-warning btn-sm deselect-all">{{ 'Delete all' }}</span>
+                                                                <span
+                                                                    class="select-all btn btn-warning btn-sm">{{ 'Select all' }}</span>
+                                                                <span
+                                                                    class="btn btn-warning btn-sm deselect-all">{{ 'Delete all' }}</span>
                                                             </label>
 
-                                                            <select name="role[]"
-                                                                    id="role"
-                                                                    class="form-control select2-full-bg"
-                                                                    data-bgcolor="teal" data-bgcolor-variation="lighten-3" data-text-color="black"
-                                                                    multiple="multiple" required>
-                                                                @foreach($roles as $id => $roles)
-                                                                    <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($role) && $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
+                                                            <select name="role[]" id="role"
+                                                                class="form-control select2-full-bg" data-bgcolor="teal"
+                                                                data-bgcolor-variation="lighten-3" data-text-color="black"
+                                                                multiple="multiple" required>
+                                                                @foreach ($roles as $id => $roles)
+                                                                    <option value="{{ $id }}"
+                                                                        {{ in_array($id, old('roles', [])) || (isset($role) && $user->roles->contains($id)) ? 'selected' : '' }}>
+                                                                        {{ $roles }}</option>
                                                                 @endforeach
                                                             </select>
 
-                                                            @if($errors->has('role'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('role') }}</p>
+                                                            @if ($errors->has('role'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('role') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row {{ $errors->has('type_user_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Type User <code style="color:red;">required</code></label>
+                                                    <div
+                                                        class="form-group row {{ $errors->has('type_user_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Type User <code
+                                                                style="color:red;">required</code></label>
                                                         <div class="mx-auto col-md-9">
-                                                            <select name="type_user_id"
-                                                                    id="type_user_id"
-                                                                    class="form-control select2" required>
-                                                                    <option value="{{ '' }}" disabled selected>Choose</option>
-                                                                @foreach($type_user as $key => $type_user_item)
-                                                                    <option value="{{ $type_user_item->id }}">{{ $type_user_item->name }}</option>
+                                                            <select name="type_user_id" id="type_user_id"
+                                                                class="form-control select2" required>
+                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                </option>
+                                                                @foreach ($type_user as $key => $type_user_item)
+                                                                    <option value="{{ $type_user_item->id }}">
+                                                                        {{ $type_user_item->name }}</option>
                                                                 @endforeach
                                                             </select>
 
-                                                            @if($errors->has('type_user_id'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('type_user_id') }}</p>
+                                                            @if ($errors->has('type_user_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('type_user_id') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -140,7 +162,8 @@
                                                 </div>
 
                                                 <div class="text-right form-actions">
-                                                    <button type="submit" style="width:120px;" class="btn btn-cyan" onclick="return confirm('Are you sure want to save this data ?')">
+                                                    <button type="submit" style="width:120px;" class="btn btn-cyan"
+                                                        onclick="return confirm('Are you sure want to save this data ?')">
                                                         <i class="la la-check-square-o"></i> Submit
                                                     </button>
                                                 </div>
@@ -180,7 +203,8 @@
                                         <div class="card-body card-dashboard">
 
                                             <div class="table-responsive">
-                                                <table class="table table-striped table-bordered text-inputs-searching default-table">
+                                                <table
+                                                    class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
                                                             <th>Date</th>
@@ -194,42 +218,54 @@
                                                     <tbody>
                                                         @forelse($user as $key => $user_item)
                                                             <tr data-entry-id="{{ $user_item->id }}">
-                                                                <td>{{ date("d/m/Y H:i:s",strtotime($user_item->created_at)) ?? '' }}</td>
+                                                                <td>{{ date('d/m/Y H:i:s', strtotime($user_item->created_at)) ?? '' }}
+                                                                </td>
                                                                 <td>{{ $user_item->name ?? '' }}</td>
                                                                 <td>{{ $user_item->email ?? '' }}</td>
                                                                 <td style="width:200px;">
-                                                                    @foreach($user_item->role as $key => $item)
-                                                                        <span class="mb-1 mr-1 badge bg-yellow text-dark">{{ $item->title }}</span>
+                                                                    @foreach ($user_item->role as $key => $item)
+                                                                        <span
+                                                                            class="mb-1 mr-1 badge bg-yellow text-dark">{{ isset($item->title) ? $item->title : 'N/A' }}</span>
                                                                     @endforeach
                                                                 </td>
                                                                 <td style="width:200px;">
-                                                                    <span class="mb-1 mr-1 badge bg-success">{{ $user_item->detail_user->type_user->name ?? 'N/A' }}</span>
+                                                                    <span
+                                                                        class="mb-1 mr-1 badge bg-success">{{ $user_item->detail_user->type_user->name ?? 'N/A' }}</span>
                                                                 </td>
                                                                 <td class="text-center">
 
                                                                     <div class="mb-1 mr-1 btn-group">
-                                                                        <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-info btn-sm dropdown-toggle"
+                                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                                            aria-expanded="false">Action</button>
                                                                         <div class="dropdown-menu">
                                                                             @can('user_show')
                                                                                 <a href="#mymodal"
                                                                                     data-remote="{{ route('backsite.user.show', $user_item->id) }}"
-                                                                                    data-toggle="modal"
-                                                                                    data-target="#mymodal"
+                                                                                    data-toggle="modal" data-target="#mymodal"
                                                                                     data-title="User Detail"
                                                                                     class="dropdown-item">
                                                                                     Show
                                                                                 </a>
                                                                             @endcan
                                                                             @can('user_edit')
-                                                                                <a class="dropdown-item" href="{{ route('backsite.user.edit', $user_item->id) }}">
+                                                                                <a class="dropdown-item"
+                                                                                    href="{{ route('backsite.user.edit', $user_item->id) }}">
                                                                                     Edit
                                                                                 </a>
                                                                             @endcan
                                                                             @can('user_delete')
-                                                                                <form action="{{ route('backsite.user.destroy', $user_item->id) }}" method="POST" onsubmit="return confirm('Are you sure want to delete this data ?');">
-                                                                                    <input type="hidden" name="_method" value="DELETE">
-                                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                                                    <input type="submit" class="dropdown-item" value="Delete">
+                                                                                <form
+                                                                                    action="{{ route('backsite.user.destroy', $user_item->id) }}"
+                                                                                    method="POST"
+                                                                                    onsubmit="return confirm('Are you sure want to delete this data ?');">
+                                                                                    <input type="hidden" name="_method"
+                                                                                        value="DELETE">
+                                                                                    <input type="hidden" name="_token"
+                                                                                        value="{{ csrf_token() }}">
+                                                                                    <input type="submit" class="dropdown-item"
+                                                                                        value="Delete">
                                                                                 </form>
                                                                             @endcan
                                                                         </div>
@@ -265,20 +301,19 @@
 
         </div>
     </div>
-<!-- END: Content-->
+    <!-- END: Content-->
 
 @endsection
 
 @push('after-script')
-
     {{-- inputmask --}}
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/jquery.inputmask.js') }}"></script>
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/inputmask.js') }}"></script>
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/bindings/inputmask.binding.js') }}"></script>
 
     <script>
-        jQuery(document).ready(function($){
-            $('#mymodal').on('show.bs.modal', function(e){
+        jQuery(document).ready(function($) {
+            $('#mymodal').on('show.bs.modal', function(e) {
                 var button = $(e.relatedTarget);
                 var modal = $(this);
 
@@ -286,23 +321,26 @@
                 modal.find('.modal-title').html(button.data("title"));
             });
 
-            $('.select-all').click(function () {
+            $('.select-all').click(function() {
                 let $select2 = $(this).parent().siblings('.select2-full-bg')
                 $select2.find('option').prop('selected', 'selected')
                 $select2.trigger('change')
             })
 
-            $('.deselect-all').click(function () {
+            $('.deselect-all').click(function() {
                 let $select2 = $(this).parent().siblings('.select2-full-bg')
                 $select2.find('option').prop('selected', '')
                 $select2.trigger('change')
             })
         });
 
-        $('.default-table').DataTable( {
+        $('.default-table').DataTable({
             "order": [],
             "paging": true,
-            "lengthMenu": [ [5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"] ],
+            "lengthMenu": [
+                [5, 10, 25, 50, 100, -1],
+                [5, 10, 25, 50, 100, "All"]
+            ],
             "pageLength": 10
         });
 
@@ -326,5 +364,4 @@
             </div>
         </div>
     </div>
-
 @endpush

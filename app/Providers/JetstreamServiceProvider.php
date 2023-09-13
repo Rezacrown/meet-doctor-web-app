@@ -36,17 +36,17 @@ class JetstreamServiceProvider extends ServiceProvider
         });
 
         // custom login Response for Fortify
-        $this->app->instance(LoginResponse::class, new class implements LoginResponse
-        {
-            public function toResponse($request)
-            {
-                // set to index
-                $home = '/';
+        // $this->app->instance(LoginResponse::class, new class implements LoginResponse
+        // {
+        //     public function toResponse($request)
+        //     {
+        //         // set to index
+        //         $home = '/';
 
-                // return redirect from variable $home
-                return redirect()->intended($home);
-            }
-        });
+        //         // return redirect from variable $home
+        //         return redirect()->intended($home);
+        //     }
+        // });
     }
 
     /**

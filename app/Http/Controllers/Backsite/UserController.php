@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -156,6 +157,23 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // load relation from this user
+        $user->load('role');
+
+        // cek other role is want to deleted
+        $roleUser = User::with('role')->where('id', $user->id)->first();
+
+        // return response($user);
+
+        // if admin try to delete super admin
+        foreach ($roleUser->role as $key => $role) {
+            if ($role->id == 1) {
+                ALert::warning('cannot delete Super Admin');
+                return redirect()->back();
+            }
+        }
+
 
         $user->forceDelete();
 

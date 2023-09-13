@@ -54,6 +54,10 @@ class CreateNewUser implements CreatesNewUsers
                 $detail_user->gender = NULL;
                 $detail_user->save();
 
+                // add role automatis saat user daftar lewat frontsite sebagai pasien
+                // $user->role_user = 5; // 5 untuk id pasien di rolenya
+
+
                 return redirect()->route('register_success');
             });
         });

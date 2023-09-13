@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Frontsite;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Models\ManagementAccess\DetailUser;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use PharIo\Manifest\Url;
+
+use function PHPUnit\Framework\throwException;
 
 class ProfileController extends Controller
 {
@@ -25,8 +30,12 @@ class ProfileController extends Controller
     {
 
         $user = Auth::user();
+        // gk perlu query lagi sdh bisa ambil dari relasi di $user data detail nya
+        // $detail = DetailUser::where('user_id', $user->id)->first();
 
-        // return response($user->detail_user);
+        // return response(url(Storage::url($user->detail_user->photo)));
+
+        // Url(Storage::url($user->detail_user->photo));
 
         return response()->view('pages.profile.index', compact('user'));
     }
@@ -58,7 +67,7 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($profile)
     {
         return abort(403);
     }
@@ -81,16 +90,31 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user)
+    public function update(UpdateProfileRequest $request, $profile)
     {
         // get all request
-        $data = $request->all(['name', 'email', 'age', 'contact', 'address', 'gender', 'photo']);
+        // $data = $request->all(['name', 'email', 'age', 'contact', 'address', 'gender', 'photo']);
+        $data = $request;
 
 
-        // return response($data['photo']);
 
-        // find user detail
-        $detail = DetailUser::where('user_id', $user)->first();
+        // find detail_user
+        $detail = DetailUser::where('user_id', $profile)->first();
+
+        // find detail_user by id
+        $user = User::findOrFail($profile);
+
+        // Check email perubahan
+        // if ($user->email !== $data['email']) {
+        //     $otherUser = User::where('email', $data['email'])->first();
+
+        //     if ($otherUser !== $user->email) {
+
+        //         return redirect()->back();
+        //         // var_dump($otherUser);
+        //     }
+        // }
+
 
 
         // cek path directori storage
@@ -101,36 +125,49 @@ class ProfileController extends Controller
 
 
         // cek insert photo
-        if (isset($data['photo'])) {
+        if ($data['photo']) {
 
-            $detailPhoto = $detail['photo'];
+            $detailPhoto = $detail['photo'] ?? null;
 
-            $data['photo'] = $request->file('photo')
-                ->store(
-                    'assets/file-users',
-                    'public'
-                );
+            $data['photo'] = $request->file('photo')->store(
+                'assets/file-users',
+                'public'
+            );
 
-            // delete old photo from storage
-            $data_old = 'storage/' . $detailPhoto;
-            if (File::exists($data_old)) {
-                File::delete($data_old);
-            } else {
-                File::delete('storage/app/public/' . $detailPhoto);
+            // cek apakah photo ada di DB dan jika ada delete old photo from storage, sekaligus cek juga di penyimpanan
+            if ($detail?->photo) {
+                $data_old = 'storage/' . $detailPhoto;
+                if (File::exists($data_old)) {
+                    File::delete($data_old);
+                } else {
+                    File::delete('storage/app/public/' . $detailPhoto);
+                }
             }
         }
-        // else insert
-        // else {
-        //     $data['photo'] = "";
-        // }
 
 
+        // var_dump($user);
+        // var_dump($detail);
 
+        // update user data
+        $user->name = $data['name'];
+        $user->email = $data['email'];
 
         // update detail
-        $detail->update($data);
+        $detail['contact'] = $data['contact'];
+        $detail['address'] = $data['address'];
+        $detail['gender'] = $data['gender'];
+        $detail['photo'] = $data['photo'] ? $data['photo'] : $detail['photo'];
 
-        return response($detail);
+        // update ke Database
+        $user->save();
+        $detail->save();
+        // DetailUser::where('user_id', $profile)->update($detail);
+
+
+
+        // return response($detail);
+        return redirect()->route('index');
 
         //    return abort(403);
     }
