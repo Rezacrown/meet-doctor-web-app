@@ -34,7 +34,7 @@ class UpdateProfileRequest extends FormRequest
             'contact' => ["nullable", 'string'],
             'address' => ["nullable", 'string'],
             'gender' => ["nullable", 'string'],
-            'photo' => ["nullable", 'image'],
+            'photo' => ["nullable", 'image', 'file'],
             'age',
         ];
     }

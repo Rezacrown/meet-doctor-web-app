@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ManagementAccess\DetailUser;
 use Illuminate\Database\Seeder;
 
 class DetailUserSeeder extends Seeder
@@ -13,7 +14,7 @@ class DetailUserSeeder extends Seeder
      */
     public function run()
     {
-         $detail_user = [
+        $detail_user = [
             [
                 'user_id'        => 1,
                 'type_user_id'   => 1,
@@ -25,5 +26,7 @@ class DetailUserSeeder extends Seeder
                 'updated_at'     => '2022-04-22 00:00:00',
             ],
         ];
+
+        DetailUser::insert($detail_user);
     }
 }

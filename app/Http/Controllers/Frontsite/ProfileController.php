@@ -127,15 +127,20 @@ class ProfileController extends Controller
         // cek insert photo
         if ($data['photo']) {
 
-            $detailPhoto = $detail['photo'] ?? null;
 
+            // store data photo ke penyimpanan laravel
             $data['photo'] = $request->file('photo')->store(
                 'assets/file-users',
                 'public'
             );
 
+
+            // set new variable and value for detailPhoto
+            $detailPhoto = $detail['photo'] ? $detail['photo'] : null;
+
+
             // cek apakah photo ada di DB dan jika ada delete old photo from storage, sekaligus cek juga di penyimpanan
-            if ($detail?->photo) {
+            if ($detail['photo']) {
                 $data_old = 'storage/' . $detailPhoto;
                 if (File::exists($data_old)) {
                     File::delete($data_old);
@@ -148,6 +153,7 @@ class ProfileController extends Controller
 
         // var_dump($user);
         // var_dump($detail);
+        // var_dump($request->file('photo')->originalName());
 
         // update user data
         $user->name = $data['name'];
@@ -159,6 +165,7 @@ class ProfileController extends Controller
         $detail['gender'] = $data['gender'];
         $detail['photo'] = $data['photo'] ? $data['photo'] : $detail['photo'];
 
+
         // update ke Database
         $user->save();
         $detail->save();
@@ -166,7 +173,8 @@ class ProfileController extends Controller
 
 
 
-        // return response($detail);
+        return response($request['photo']);
+
         return redirect()->route('index');
 
         //    return abort(403);

@@ -5,7 +5,7 @@
 
 @section('content')
 
-<!-- BEGIN: Content-->
+    <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
@@ -32,7 +32,8 @@
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('backsite.dashboard.index') }}">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('backsite.dashboard.index') }}">Dashboard</a>
+                                </li>
                                 <li class="breadcrumb-item active">Appointment</li>
                             </ol>
                         </div>
@@ -53,6 +54,9 @@
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="mb-0 list-inline">
+                                                <li><a class="mx-4 btn btn-amber"
+                                                        href="{{ route('backsite.appointment.download') }}">Downdload Data
+                                                        Excel</a></li>
                                                 <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                                 <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                                                 <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
@@ -64,7 +68,8 @@
                                         <div class="card-body card-dashboard">
 
                                             <div class="table-responsive">
-                                                <table class="table table-striped table-bordered text-inputs-searching default-table">
+                                                <table
+                                                    class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
                                                             <th>Date</th>
@@ -80,26 +85,34 @@
                                                     <tbody>
                                                         @forelse($appointment as $key => $appointment_item)
                                                             <tr data-entry-id="{{ $appointment_item->id }}">
-                                                                <td>{{ isset($appointment_item->created_at) ? date("d/m/Y H:i:s",strtotime($appointment_item->created_at)) : '' }}</td>
+                                                                <td>{{ isset($appointment_item->created_at) ? date('d/m/Y H:i:s', strtotime($appointment_item->created_at)) : '' }}
+                                                                </td>
                                                                 <td>{{ $appointment_item->doctor->name ?? '' }}</td>
                                                                 <td>{{ $appointment_item->user->name ?? '' }}</td>
                                                                 <td>{{ $appointment_item->consultation->name ?? '' }}</td>
                                                                 <td>
-                                                                    @if($appointment_item->level == 1)
-                                                                        <span class="badge badge-info">{{ 'Low' }}</span>
+                                                                    @if ($appointment_item->level == 1)
+                                                                        <span
+                                                                            class="badge badge-info">{{ 'Low' }}</span>
                                                                     @elseif($appointment_item->level == 2)
-                                                                        <span class="badge badge-warning">{{ 'Medium' }}</span>
+                                                                        <span
+                                                                            class="badge badge-warning">{{ 'Medium' }}</span>
                                                                     @elseif($appointment_item->level == 3)
-                                                                        <span class="badge badge-danger">{{ 'High' }}</span>
+                                                                        <span
+                                                                            class="badge badge-danger">{{ 'High' }}</span>
                                                                     @endif
                                                                 </td>
-                                                                <td>{{ isset($appointment_item->date) ? date("d/m/Y",strtotime($appointment_item->date)) : '' }}</td>
-                                                                <td>{{ isset($appointment_item->time) ? date("H:i:s",strtotime($appointment_item->time)) : '' }}</td>
+                                                                <td>{{ isset($appointment_item->date) ? date('d/m/Y', strtotime($appointment_item->date)) : '' }}
+                                                                </td>
+                                                                <td>{{ isset($appointment_item->time) ? date('H:i:s', strtotime($appointment_item->time)) : '' }}
+                                                                </td>
                                                                 <td>
-                                                                    @if($appointment_item->status == 1)
-                                                                        <span class="badge badge-success">{{ 'Payment Completed' }}</span>
+                                                                    @if ($appointment_item->status == 1)
+                                                                        <span
+                                                                            class="badge badge-success">{{ 'Payment Completed' }}</span>
                                                                     @elseif($appointment_item->status == 2)
-                                                                        <span class="badge badge-warning">{{ 'Waiting Payment' }}</span>
+                                                                        <span
+                                                                            class="badge badge-warning">{{ 'Waiting Payment' }}</span>
                                                                     @else
                                                                         <span>{{ 'N/A' }}</span>
                                                                     @endif
@@ -135,16 +148,19 @@
 
         </div>
     </div>
-<!-- END: Content-->
+    <!-- END: Content-->
 
 @endsection
 
 @push('after-script')
     <script>
-        $('.default-table').DataTable( {
+        $('.default-table').DataTable({
             "order": [],
             "paging": true,
-            "lengthMenu": [ [5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"] ],
+            "lengthMenu": [
+                [5, 10, 25, 50, 100, -1],
+                [5, 10, 25, 50, 100, "All"]
+            ],
             "pageLength": 10
         });
     </script>

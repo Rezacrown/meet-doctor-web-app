@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backsite;
 
+use App\Exports\TransactionExcel;
 use App\Http\Controllers\Controller;
 use App\Models\Operational\Transaction;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportTransactionController extends Controller
 {
@@ -103,5 +105,10 @@ class ReportTransactionController extends Controller
     public function destroy($id)
     {
         return abort(403);
+    }
+
+    public function download()
+    {
+        return Excel::download(new TransactionExcel, 'transaction.xlsx');
     }
 }

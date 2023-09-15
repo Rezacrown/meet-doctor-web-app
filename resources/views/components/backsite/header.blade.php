@@ -8,9 +8,9 @@
                 <li class="mr-auto nav-item mobile-menu d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs"
                         href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="{{route('backsite.dashboard.index')}}" ><img
-                            class="brand-logo" alt="modern admin logo"
-                            src="{{ asset('/assets/backsite/app-assets/images/logo/logo.png')  }}">
+                    <a class="navbar-brand" href="{{ route('backsite.dashboard.index') }}"><img class="brand-logo"
+                            alt="modern admin logo"
+                            src="{{ asset('/assets/backsite/app-assets/images/logo/logo.png') }}">
                         <h3 class="brand-text">Back Office</h3>
                     </a>
                 </li>
@@ -106,17 +106,20 @@
                             href="#" data-toggle="dropdown"><span
                                 class="mr-1 user-name text-bold-700">{{ Auth::user()->name }}</span><span
                                 class="avatar avatar-online"><img
-                                    src="{{ Auth::user()->detail_user?->photo ? url(Storage::url(Auth::user()->detail_user?->photo)) :  asset('/assets/backsite/app-assets/images/portrait/small/avatar-s-19.png') }}"
+                                    src="{{ Auth::user()->detail_user?->photo ? url(Storage::url(Auth::user()->detail_user?->photo)) : asset('/assets/backsite/app-assets/images/portrait/small/avatar-s-19.png') }}"
                                     alt="avatar"><i></i></span></a>
+
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
-                                href="user-profile.html"><i class="ft-user"></i> Edit Profile</a>
+                                href="{{ route('profiles.index') }}"><i class="ft-user"></i> Edit Profile</a>
                             <div class="dropdown-divider"></div>
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="ft-power"></i> Logout
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
                             </a>
                         </div>
                     </li>

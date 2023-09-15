@@ -40,8 +40,8 @@ class LandingController extends Controller
     public function index()
     {
 
-        $specialist = Specialist::orderBy('name', 'asc')->limit(10)->get();
-        $doctor = Doctor::orderBy('created_at', 'asc')->limit(10)->get();
+        $specialist = Specialist::orderBy('name', 'asc')->limit(5)->get();
+        $doctor = Doctor::orderBy('created_at', 'asc')->limit(5)->get();
 
         // return response($specialist);
 
@@ -69,7 +69,6 @@ class LandingController extends Controller
     {
         //
         return abort(404);
-
     }
 
     /**
@@ -82,7 +81,6 @@ class LandingController extends Controller
     {
         //
         return abort(404);
-
     }
 
     /**
@@ -95,7 +93,6 @@ class LandingController extends Controller
     {
         //
         return abort(404);
-
     }
 
     /**
@@ -109,7 +106,6 @@ class LandingController extends Controller
     {
         //
         return abort(404);
-
     }
 
     /**
@@ -122,6 +118,5 @@ class LandingController extends Controller
     {
         //
         return abort(404);
-
     }
 }

@@ -23,6 +23,7 @@ use App\Http\Controllers\Backsite\RoleController;
 use App\Http\Controllers\backsite\SpecialistController;
 use App\Http\Controllers\backsite\TypeUserController;
 use App\Http\Controllers\Backsite\UserController;
+use App\Http\Controllers\Frontsite\DashboardController as FrontsiteDashboardController;
 use App\Http\Controllers\Frontsite\ProfileController;
 use App\Http\Controllers\Frontsite\RegisterController;
 
@@ -48,11 +49,19 @@ Route::resource('/', LandingController::class);
 // Route::resource('/', LandingController::class)->middleware(['auth::sactum' => 'verified']);
 
 
+// Route::get('/dashboard', function () {
+//     return response()->view('pages.frontsite.dashboard.index');
+// });
+
+
 
 // contoh groping route ->
 
 // ini adalah Front site
 Route::group(['middleware' => ['auth::sactum' => 'verified']], function () {
+
+    // dashboard page for landing
+    Route::resource('dashboard', FrontsiteDashboardController::class);
 
     // profile page
     Route::resource('profile', ProfileController::class)->names('profiles');
@@ -115,9 +124,11 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
     Route::resource('hospital_patient', HospitalPatientController::class);
 
     // report appointment route
+    Route::get('appointment/download', [ReportAppointmentController::class, 'download'])->name('appointment.download');
     Route::resource('appointment', ReportAppointmentController::class);
 
     // report transaction route
+    Route::get('transaction/download', [ReportTransactionController::class, 'download'])->name('transaction.download');
     Route::resource('transaction', ReportTransactionController::class);
 });
 

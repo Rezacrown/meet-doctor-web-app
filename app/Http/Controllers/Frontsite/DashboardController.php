@@ -1,26 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Backsite;
+namespace App\Http\Controllers\Frontsite;
 
-use App\Exports\AppointmentExcel;
 use App\Http\Controllers\Controller;
 use App\Models\Operational\Appointment;
 use Illuminate\Http\Request;
-
-// use needed
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 
-// use for download
-use Maatwebsite\Excel\Facades\Excel;
 
-class ReportAppointmentController extends Controller
+class DashboardController extends Controller
 {
+
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth');;
     }
     /**
      * Display a listing of the resource.
@@ -29,20 +23,16 @@ class ReportAppointmentController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('appointment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // ambil user yg sedang login
+        $user = Auth::user();
 
-        $type_user_condition = Auth::user()->detail_user?->type_user_id;
+        // ambil data appointment berdasarkan user
+        $appointment = Appointment::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
 
+        $appointment->load('users');
+        // return response($appointment);
 
-        if ($type_user_condition == 1) {
-            // for admin
-            $appointment = Appointment::orderBy('created_at', 'desc')->get();
-        } else {
-            // other admin for doctor & patient ( task for everyone here )
-            $appointment = Appointment::orderBy('created_at', 'desc')->get();
-        }
-
-        return response()->view('pages.backsite.operational.appointment.index', compact('appointment'));
+        return response()->view('pages.frontsite.dashboard.index', compact('appointment'));
     }
 
     /**
@@ -110,9 +100,4 @@ class ReportAppointmentController extends Controller
     {
         return abort(403);
     }
-
-    public function download() {
-        return Excel::download(new AppointmentExcel, 'appointment.xlsx');
-    }
-
 }
