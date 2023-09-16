@@ -93,8 +93,8 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request, $profile)
     {
         // get all request
-        // $data = $request->all(['name', 'email', 'age', 'contact', 'address', 'gender', 'photo']);
-        $data = $request;
+        $data = $request->all(['name', 'email', 'age', 'contact', 'address', 'gender', 'photo']);
+        // $data = $request;
 
 
 
@@ -173,7 +173,7 @@ class ProfileController extends Controller
 
 
 
-        return response($request['photo']);
+        // return response($data['photo']);
 
         return redirect()->route('index');
 
