@@ -27,7 +27,7 @@
                         class='text-[#1E2B4F]  relative {{ Request::is('/')
                             ? "after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg"
                             : "text-[#1E2B4F] hover:text-gray-500 inline-flex
-                                                                                                                                                                                                              items-center px-1 pt-1 text-lg font-medium" }}
+                                                                                                                                                                                                                                                              items-center px-1 pt-1 text-lg font-medium" }}
               '>
                         Home
                     </a>
@@ -35,7 +35,7 @@
                         class='text-[#1E2B4F]  relative {{ Request::is('/featured')
                             ? "after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg"
                             : "text-[#1E2B4F] hover:text-gray-500 inline-flex
-                                                                                                                                                                                                              items-center px-1 pt-1 text-lg font-medium" }}
+                                                                                                                                                                                                                                                              items-center px-1 pt-1 text-lg font-medium" }}
               '>
                         Featured
                     </a>
@@ -43,7 +43,7 @@
                         class='text-[#1E2B4F]  relative {{ Request::is('/category')
                             ? "after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg"
                             : "text-[#1E2B4F] hover:text-gray-500 inline-flex
-                                                                                                                                                                                                              items-center px-1 pt-1 text-lg font-medium" }}
+                                                                                                                                                                                                                                                              items-center px-1 pt-1 text-lg font-medium" }}
               '>
                         Category
                     </a>
@@ -51,7 +51,7 @@
                         class='text-[#1E2B4F]  relative {{ Request::is('/price')
                             ? "after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg"
                             : "text-[#1E2B4F] hover:text-gray-500 inline-flex
-                                                                                                                                                                                                              items-center px-1 pt-1 text-lg font-medium" }}
+                                                                                                                                                                                                                                                              items-center px-1 pt-1 text-lg font-medium" }}
               '>
                         Pricing
                     </a>
@@ -77,9 +77,9 @@
                         <span class="sr-only">Open main menu</span>
 
                         <!--
-                                          Icon when menu is closed.
-                                          Menu open: "hidden", Menu closed: "block"
-                                        -->
+                                                  Icon when menu is closed.
+                                                  Menu open: "hidden", Menu closed: "block"
+                                                -->
                         <svg x-show="!navbarMobileOpen" class="block w-8 h-8" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -87,9 +87,9 @@
                         </svg>
 
                         <!--
-                                          Icon when menu is open.
-                                          Menu open: "block", Menu closed: "hidden"
-                                        -->
+                                                  Icon when menu is open.
+                                                  Menu open: "block", Menu closed: "hidden"
+                                                -->
                         <svg x-show="navbarMobileOpen" class="block w-8 h-8" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -117,7 +117,7 @@
                                         {{-- this section mask  read from type user --}}
                                         Hi, {{ Auth::user()->name }}
                                     </div>
-                                    <div class="text-sm text-[#AFAEC3]">Pasien</div>
+                                    <div class="text-sm text-[#AFAEC3]">{{Auth::user()->detail_user->type_user->name}}</div>
                                 </div>
                                 <img class="h-12 w-12 rounded-full ring-1 ring-offset-4 ring-[#0D63F3]"
                                     src="{{ Auth::user()?->detail_user?->photo ? url(Storage::url(Auth::user()?->detail_user?->photo)) : asset('assets/frontsite/images/authenticated-user.svg') }}"
@@ -176,9 +176,9 @@
                         <span class="sr-only">Open main menu</span>
 
                         <!--
-                                         Icon when menu is closed.
-                                         Menu open: "hidden", Menu closed: "block"
-                                       -->
+                                                 Icon when menu is closed.
+                                                 Menu open: "hidden", Menu closed: "block"
+                                               -->
                         <svg x-show="!navbarMobileOpen" class="block w-8 h-8" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -186,9 +186,9 @@
                         </svg>
 
                         <!--
-                                         Icon when menu is open.
-                                         Menu open: "block", Menu closed: "hidden"
-                                       -->
+                                                 Icon when menu is open.
+                                                 Menu open: "block", Menu closed: "hidden"
+                                               -->
                         <svg x-show="navbarMobileOpen" class="block w-8 h-8" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -221,14 +221,53 @@
                 class="border-transparent text-[#1E2B4F] hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Pricing</a>
         </div>
 
-        <!-- Profile (Mobile no authenticated) -->
-        <div class="py-3 border-gray-200">
-            <a href="{{ route('login') }}"
-                class="flex items-center justify-center text-center mx-4 rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3">
-                Sign In
-            </a>
-        </div>
+        {{-- profile ( mobille no authenticte ) --}}
+        @guest
+            <!-- Profile (Mobile no authenticated) -->
+            <div class="py-3 border-gray-200">
+                <a href="{{ route('login') }}"
+                    class="flex items-center justify-center text-center mx-4 rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3">
+                    Sign In
+                </a>
+            </div>
+        @endguest
+
+        <!-- Profile (Mobile Authenticated) -->
+        @auth
+            <div x-data="{ profileMobilenOpen: false }" class="pt-4 pb-3 border-t border-gray-200">
+                <div @click="profileMobilenOpen = ! profileMobilenOpen" class="flex items-center px-4 cursor-pointer">
+                    <div class="flex-shrink-0">
+                        <img class="h-10 w-10 rounded-full ring-1 ring-offset-4 ring-[#0D63F3]"
+                            src="{{ Auth::user()?->detail_user?->photo ? url(Storage::url(Auth::user()?->detail_user?->photo)) : asset('assets/frontsite/images/authenticated-user.svg') }}" alt="" />
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-base font-medium text-[#1E2B4F]"> {{ Auth::user()->name }}</div>
+                        <div class="text-sm text-[#AFAEC3]">
+                            {{Auth::user()->detail_user?->type_user?->name}}
+                        </div>
+                    </div>
+                </div>
+                <div x-show="profileMobilenOpen" class="mt-3 space-y-1">
+                    <a href="/profile"
+                        class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-[#1E2B4F] hover:bg-gray-100">Your
+                        Profile</a>
+                    <a href="/dashboard"
+                        class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-[#1E2B4F] hover:bg-gray-100">Dashboard</a>
+
+                        <form action="{{ route('logout') }}" method="POST" >
+                            @csrf
+                            <button
+                                class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-[#1E2B4F] hover:bg-gray-100">Sign
+                                out</button>
+                        </form>
+                </div>
+            </div>
+        @endauth
 
     </div>
+
+
+
+
 </nav>
 <!-- End Header -->
